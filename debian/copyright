@@ -1,0 +1,67 @@
+This package was debianized by Raphael Enrici <blacknoz@club-internet.fr> on
+Wed,  1 Mar 2006 21:47:00 +0100.
+
+It was downloaded from
+    http://yersinia.sf.net/
+    http://www.yersinia.net/download/
+
+Upstream authors (contents of AUTHORS file):
+	- Alfredo Andres Omella <slay@yersinia.net>
+	- David Barroso Berrueta <tomac@yersinia.net>
+
+Copyright (C) 2005 Alfredo Andres and David Barroso
+Copyright (C) 1989-2005 Free Software Foundation, Inc.
+
+License:
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+The Debian packaging is 
+(C) 2006, Maxence Dunnewind <maxenced@gmail.com>
+(C) 2007, Raphael Enrici <blacknoz@club-internet.fr>
+and is licensed under the GPL, see above.
+
+The file src/md5.c has this copyright and license information:
+ * The algorithm is due to Ron Rivest.  This code was
+ * written by Colin Plumb in 1993, no copyright is claimed.
+ * This code is in the public domain; do with it what you wish.
+
+The file src/terminal-defs.h is
+Copyright 2005,2006 Alfredo Andres and David Barroso
+Copyright 2004-2005 Slay & Tomac.
+and is licensed under the GPL, see above.
+
+The files src/ncurses-interface.c and src/commands.c are
+Copyright 2005 Alfredo Andres and David Barroso
+Copyright (c) 2004-2006 by tomac & Slay, Inc.
+and are licensed under the GPL, see above.
+
+The file install-sh has this copyright and license information:
+
+# Copyright 1991 by the Massachusetts Institute of Technology
+#
+# Permission to use, copy, modify, distribute, and sell this software and its
+# documentation for any purpose is hereby granted without fee, provided that
+# the above copyright notice appear in all copies and that both that
+# copyright notice and this permission notice appear in supporting
+# documentation, and that the name of M.I.T. not be used in advertising or
+# publicity pertaining to distribution of the software without specific,
+# written prior permission.  M.I.T. makes no representations about the
+# suitability of this software for any purpose.  It is provided "as is"
+# without express or implied warranty.
+

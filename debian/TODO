@@ -1,0 +1,9 @@
+
+- provide two different builds of the package. One with the GTK enabled version
+  of Yersinia and the other with the CLI only build.
+
+- eventually provide a way to start Yersinia in daemon mode at boot time with a
+  default configuration file placed in /etc/yersinia. This configuration file 
+  should be customised during install so that we don't have a default Yersinia
+  account enabled on all Debian hosts...
+  (see yersinia -D -c /etc/yersinia/yersinia.conf -l /var/log/yersinia.log)
