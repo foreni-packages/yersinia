@@ -2,8 +2,8 @@
  * Implementation of Cisco CLI commands
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-       "$Id: commands.c 2 2006-04-03 21:04:25Z tomac $";
+       "$Id: commands.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -1700,8 +1700,7 @@ command_set_proto(struct term_node *node, struct words_array *warray,
                                      node->protocol[proto].commands_param[x], 
                                      warray->word[warray->indx], 
                                      prot_comms[x].size_print, 
-                                     prot_comms[x].min, 
-                                     prot_comms[x].max);
+                                     prot_comms[x].size);
          if (fail == -1)
              return (command_bad_input(node,warray->indx));
 

@@ -2,8 +2,8 @@
  * GTK Callbacks
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-"$Id: gtk-callbacks.c 15 2006-04-10 20:42:06Z tomac $";
+"$Id: gtk-callbacks.c 48 2007-05-08 09:41:17Z slay $";
 #endif
 
 
@@ -610,7 +610,7 @@ void gtk_c_on_menu_options_edit_toggle (GtkWidget *menu, gpointer userdata)
                   widget = lookup_widget(GTK_WIDGET(notebook), tmp_name);
                   text = (char *) gtk_entry_get_text(GTK_ENTRY(widget));
                   if (parser_filter_param(param[j].type, helper->node->protocol[i].commands_param[j],
-                           text, param[j].size_print, param[j].min, param[j].max) < 0) {
+                           text, param[j].size_print, param[j].size) < 0) {
                      warning = gtk_i_create_warningdialog("Bad Parameter %s with wrong value %s in protocol %s!", 
                            param[j].ldesc, text, protocols[i].namep);
                      gtk_widget_show(warning);
@@ -1067,7 +1067,7 @@ gtk_c_view_popup_menu(GtkWidget *menuitem, gpointer userdata)
     mode = helper->mode;
     row = helper->row;
 
-    write_log(0, "Cargando de mode es %d y row es %d\n", mode, row);
+    //write_log(0, "Cargando de mode es %d y row es %d\n", mode, row);
     if (protocols[mode].load_values)
         (*protocols[mode].load_values)((struct pcap_data *)&protocols[mode].stats[row], node->protocol[mode].tmp_data);
     else {
@@ -1132,7 +1132,7 @@ gtk_c_on_extra_button_clicked(GtkButton *button, gpointer userdata)
 
    helper = (struct gtk_s_helper *)userdata;
 
-   write_log(0, "helper es %d\n", helper->mode);
+   //write_log(0, "helper es %d\n", helper->mode);
    extrawindow = gtk_i_create_extradialog(helper);
    gtk_widget_show(extrawindow);
 }
@@ -1147,7 +1147,7 @@ gtk_c_extra_button_add_clicked(GtkButton *button, gpointer userdata)
 
    helper = (struct gtk_s_helper *)userdata;
 
-   write_log(0, "helper es %X\n", helper);
+   //write_log(0, "helper es %X\n", helper);
    proto = gtk_notebook_get_current_page(GTK_NOTEBOOK(helper->notebook));
    window = gtk_i_create_add_extradialog(helper, proto);
    gtk_widget_show(window);

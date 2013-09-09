@@ -1,8 +1,8 @@
-$Id: INSTALL 2 2006-04-03 21:04:25Z tomac $
+$Id: INSTALL 43 2007-04-27 11:07:17Z slay $
 
-Last release and CVS tree can be always accessed at
+Last release and CVS/SVN repository can be always accessed at
     
-       http://www.sf.net/projects/yersinia
+       http://www.yersinia.net
 
 
 Requirements
@@ -17,9 +17,9 @@ Requirements
 
 
 
-Sources from CVS tree
----------------------
-If the sources have been obtained from the CVS tree you will need the
+Sources from CVS/SVN repository
+-------------------------------
+If the sources have been obtained from the CVS/SVN repository you will need the
 autotools and automake packages. Autoconf must be at least version 2.52 and 
 automake must be at least version 1.6.
 

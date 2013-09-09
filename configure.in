@@ -1,9 +1,9 @@
-dnl $Id: configure.in 22 2007-01-26 19:22:14Z tomac $
+dnl $Id: configure.in 43 2007-04-27 11:07:17Z slay $
 dnl
 dnl Process this file with autoconf to produce a configure script.
 dnl
 
-AC_INIT(yersinia, 0.7.1, yersinia@yersinia.net)
+AC_INIT(yersinia, 0.7.3, yersinia@yersinia.net)
 
 AC_CONFIG_SRCDIR([src/yersinia.c])
 
@@ -102,6 +102,43 @@ fi
 AH_TEMPLATE([HAVE_PCAP_DUMP_FLUSH], [pcap_dump_flush])
 AC_CHECK_LIB(pcap, pcap_dump_flush,AC_DEFINE(HAVE_PCAP_DUMP_FLUSH))
            
+dnl Check for BSD's BPF
+disable_bpf=no
+have_bpf=no
+AC_MSG_CHECKING(for BPF device sending support)
+AC_TRY_RUN([
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <errno.h>
+
+int 
+main(int argc, char *argv[]) {
+	int fd;
+	
+	fd = open("/dev/bpf0", O_RDONLY, 0);
+	
+	/* if we opened it, we're good */
+	if (fd > 1)
+		exit(0);
+		
+	/* if we got EBUSY or permission denied it exists, so we're good */
+	if (fd < 0 && (errno == EBUSY || errno == 13))
+		exit(0);
+		
+	/* else suck, no good */
+    exit(-1);
+}],
+	[
+	if test $disable_bpf = no ; then
+	    AC_DEFINE([HAVE_BPF], [1], 
+	              [Do we have BPF device support?])
+		AC_MSG_RESULT(yes)
+		have_bpf=yes
+	else
+		AC_MSG_RESULT(no)
+	fi
+	])
 
 dnl
 dnl

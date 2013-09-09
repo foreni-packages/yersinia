@@ -1,10 +1,10 @@
 /* cdp.h
  * Definitions for Cisco Discovery Protocol
- * $Id: cdp.h 17 2006-04-17 21:02:28Z tomac $ 
+ * $Id: cdp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,12 +118,12 @@ static const struct tuple_type_desc cdp_type_desc[] = {
 };
 
 static struct attack_param cdp_tlv[] = {
-    { NULL, "DevID",                   15, 0,   0, FIELD_STR, 15, NULL },
-    { NULL, "Addresses",               4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Port ID",                 15, 0,   0, FIELD_STR, 15, NULL },
-    { NULL, "Capabilities",            4, 0, 0xFFFFFFFF, FIELD_HEX,  8, NULL },
-    { NULL, "Software version",        15, 0,   0, FIELD_STR, 15, NULL },
-    { NULL, "Platform",                15, 0,   0, FIELD_STR, 15, NULL }
+    { NULL, "DevID",                   15,  FIELD_STR, 15, NULL },
+    { NULL, "Addresses",               4,  FIELD_IP,  15, NULL },
+    { NULL, "Port ID",                 15,  FIELD_STR, 15, NULL },
+    { NULL, "Capabilities",            4,  FIELD_HEX,  8, NULL },
+    { NULL, "Software version",        15, FIELD_STR, 15, NULL },
+    { NULL, "Platform",                15, FIELD_STR, 15, NULL }
 };
 
 
@@ -145,33 +145,33 @@ int8_t cdp_tlv_version(void *, void *, char *);
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param cdp_comm_params[] = {
-    { CDP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { CDP_SMAC, "source",    "Source MAC", 6,  FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { CDP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { CDP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17,  1, 0, NULL, NULL },
-    { CDP_VER, "version",   "Version", 1, 0, 255, FIELD_HEX, "Set cdp version", 
+    { CDP_VER, "version",   "Version", 1, FIELD_HEX, "Set cdp version", 
                                         " <0x00-0xFF>    cdp version", 2, 2, 0, NULL, NULL },
-    { CDP_TTL, "ttl",       "TTL", 1, 0, 255, FIELD_HEX, "Set cdp ttl", 
+    { CDP_TTL, "ttl",       "TTL", 1, FIELD_HEX, "Set cdp ttl", 
                                         " <0x00-0xFF>    cdp Time To Live", 2, 2, 1, NULL, NULL },
-    { CDP_CHECKSUM, "checksum",  "Checksum", 2, 0, 65535, FIELD_HEX, "Set cdp checksum", 
+    { CDP_CHECKSUM, "checksum",  "Checksum", 2, FIELD_HEX, "Set cdp checksum", 
                                         " <0x00-0xFFFF>    Packet checksum", 4,  2, 0, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL },
-    { CDP_TLV, "tlv",       "TLV", 0, 0, 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
+    { CDP_TLV, "tlv",       "TLV", 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
 };
 
 struct commands_param_extra cdp_params_tlv[] = {
-   { CDP_TYPE_DEVID,           "devid", "DevID",            MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set Device ID", " WORD Device ID", MAX_STRING_SIZE, 1, NULL },
-   { CDP_TYPE_ADDRESS,         "address", "Addresses",        4, 0, 0, FIELD_IP, "Set IP Address", " A.A.A.A   IPv4 address", 15, 0, NULL },
-   { CDP_TYPE_PORTID,          "portid", "Port ID",          MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set Port ID", " WORD Port ID", MAX_STRING_SIZE, 0, NULL },
-   { CDP_TYPE_CAPABILITY,      "capab", "Capabilities",     4, 0, 0xFFFFFFFF, FIELD_HEX, "Set Capabilities", " <0x00-0xFFFFFFFF>   Capabilities", 8, 0, NULL },
-   { CDP_TYPE_VERSION,         "swversion", "Software version", MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set SW Version", " WORD SW Version", MAX_STRING_SIZE, 0, NULL },
-   { CDP_TYPE_PLATFORM,        "platform", "Platform",         MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set Platform", " WORD Platform", MAX_STRING_SIZE, 0, NULL },
-   { CDP_TYPE_IPPREFIX,        "gateway", "IP Prefix/Gateway", 4, 0, 0, FIELD_IP, "Set Gateway", " A.A.A.A   IPv4 address", 15, 0, NULL },
+   { CDP_TYPE_DEVID,           "devid", "DevID",            MAX_STRING_SIZE, FIELD_STR, "Set Device ID", " WORD Device ID", MAX_STRING_SIZE, 1, NULL },
+   { CDP_TYPE_ADDRESS,         "address", "Addresses",        4, FIELD_IP, "Set IP Address", " A.A.A.A   IPv4 address", 15, 0, NULL },
+   { CDP_TYPE_PORTID,          "portid", "Port ID",          MAX_STRING_SIZE, FIELD_STR, "Set Port ID", " WORD Port ID", MAX_STRING_SIZE, 0, NULL },
+   { CDP_TYPE_CAPABILITY,      "capab", "Capabilities",     4, FIELD_HEX, "Set Capabilities", " <0x00-0xFFFFFFFF>   Capabilities", 8, 0, NULL },
+   { CDP_TYPE_VERSION,         "swversion", "Software version", MAX_STRING_SIZE, FIELD_STR, "Set SW Version", " WORD SW Version", MAX_STRING_SIZE, 0, NULL },
+   { CDP_TYPE_PLATFORM,        "platform", "Platform",         MAX_STRING_SIZE, FIELD_STR, "Set Platform", " WORD Platform", MAX_STRING_SIZE, 0, NULL },
+   { CDP_TYPE_IPPREFIX,        "gateway", "IP Prefix/Gateway", 4, FIELD_IP, "Set Gateway", " A.A.A.A   IPv4 address", 15, 0, NULL },
    /*        { CDP_TYPE_PROTOCOL_HELLO,  "Protocol Hello" },*/
-   { CDP_TYPE_VTP_MGMT_DOMAIN, "vtpdomain", "VTP Domain",       MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set VTP Domain", " WORD VTP Domain", MAX_STRING_SIZE, 0, NULL },
+   { CDP_TYPE_VTP_MGMT_DOMAIN, "vtpdomain", "VTP Domain",       MAX_STRING_SIZE, FIELD_STR, "Set VTP Domain", " WORD VTP Domain", MAX_STRING_SIZE, 0, NULL },
    /*        { CDP_TYPE_NATIVE_VLAN,     "Native VLAN" },
              { CDP_TYPE_DUPLEX,          "Duplex" },
              { CDP_TYPE_VOIP_VLAN_REPLY, "VoIP VLAN Reply" },
@@ -179,7 +179,7 @@ struct commands_param_extra cdp_params_tlv[] = {
              { CDP_TYPE_MTU,             "MTU"},
              { CDP_TYPE_TRUST_BITMAP,    "Trust Bitmap" },
              { CDP_TYPE_UNTRUSTED_COS,   "Untrusted CoS" },*/
-   { CDP_TYPE_SYSTEM_NAME,     "system", "System Name",  MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set System Name", " WORD System Name", MAX_STRING_SIZE, 0, NULL }/*
+   { CDP_TYPE_SYSTEM_NAME,     "system", "System Name",  MAX_STRING_SIZE, FIELD_STR, "Set System Name", " WORD System Name", MAX_STRING_SIZE, 0, NULL }/*
              { CDP_TYPE_SYSTEM_OID,      "System ObjectID" },
              { CDP_TYPE_MANAGEMENT_ADDR, "Management Addr" },
              { CDP_TYPE_LOCATION,        "Location" },*/

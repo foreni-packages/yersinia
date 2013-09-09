@@ -1,11 +1,11 @@
 /* dtp.h
  * Definitions for Cisco's Dynamic Trunking Protocol
  *
- * $Id: dtp.h 5 2006-04-04 09:51:19Z slay $ 
+ * $Id: dtp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -124,23 +124,23 @@ struct dtp_data {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param dtp_comm_params[] = {
-    { DTP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { DTP_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DTP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { DTP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DTP_VERSION, "version","Version", 1, 0, 255, FIELD_HEX, "Set dtp version", 
+    { DTP_VERSION, "version","Version", 1, FIELD_HEX, "Set dtp version", 
                                         " <0x00-0xFF>    dynamic trunking version", 2, 2, 0, NULL, NULL },
-    { DTP_NEIGH, "neighbor", "Neighbor-ID", 6, 0, 0, FIELD_BYTES, "Set neighbor id", 
+    { DTP_NEIGH, "neighbor", "Neighbor-ID", 6, FIELD_BYTES, "Set neighbor id", 
                                         " HHHHHH    48 bit neighbor address", 12, 2, 1, NULL, NULL },
-    { DTP_STATUS, "status",  "Status", 1, 0, 255, FIELD_HEX, "Set trunking status", 
+    { DTP_STATUS, "status",  "Status", 1, FIELD_HEX, "Set trunking status", 
                                         " <0x00-0xFF>    dynamic trunking status", 2, 2, 1, NULL, dtp_status },
-    { DTP_TYPE, "type",      "Type", 1, 0, 255, FIELD_HEX, "Set trunking type", 
+    { DTP_TYPE, "type",      "Type", 1, FIELD_HEX, "Set trunking type", 
                                         " <0x00-0xFF>    dynamic trunking type", 2, 2, 0, NULL, dtp_type },
-    { DTP_DOMAIN, "domain",  "Domain", DTP_DOMAIN_SIZE, 0, 0, FIELD_STR, "Set vtp domain name to use", 
+    { DTP_DOMAIN, "domain",  "Domain", DTP_DOMAIN_SIZE, FIELD_STR, "Set vtp domain name to use", 
                                         " WORD    Domain name", DTP_DOMAIN_SIZE, 3, 1, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                              " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 

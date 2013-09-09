@@ -1,11 +1,11 @@
 /* dhcp.h
  * Definitions for Dynamic Host Configuration Protocol
  *
- * $Id: dhcp.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: dhcp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,20 +151,20 @@ static const struct tuple_type_desc dhcp_type_desc[] = {
 };
 
 static struct attack_param dhcp_tlv[] = {
-    { NULL, "SUBNETMASK",               4, 0,   0, FIELD_IP, 15, NULL },
-    { NULL, "ROUTER",                   4, 0,   0, FIELD_IP, 15, NULL },
-    { NULL, "DNS",                      4, 0,   0, FIELD_IP, 15, NULL },
-    { NULL, "HOSTNAME",                 15, 0,  0, FIELD_STR, 15, NULL },
-    { NULL, "DOMAINNAME",               15, 0,  0, FIELD_STR, 15, NULL },
-    { NULL, "DISCOVERADDR",             4, 0,   0, FIELD_IP, 15, NULL },
-    { NULL, "LEASETIME",                4, 0,   0xFFFFFFFF, FIELD_HEX, 8, NULL },
-    { NULL, "MESSAGETYPE",              1, 0,   0xFF, FIELD_HEX, 2, NULL },
-    { NULL, "SERVIDENT",                4, 0,   0, FIELD_IP, 15, NULL },
-    { NULL, "MESSAGE",                 15, 0,   0, FIELD_STR, 15, NULL },
-    { NULL, "RENEWTIME",                4, 0,   0xFFFFFFFF, FIELD_HEX, 8, NULL },
-    { NULL, "REBINDTIME",               4, 0,   0xFFFFFFFF, FIELD_HEX, 8, NULL },
-    { NULL, "CLASSID",                 15, 0,  0, FIELD_STR, 15, NULL },
-    { NULL, "END",                      3, 0,  0, FIELD_STR, 3, NULL },
+    { NULL, "SUBNETMASK",               4, FIELD_IP, 15, NULL },
+    { NULL, "ROUTER",                   4, FIELD_IP, 15, NULL },
+    { NULL, "DNS",                      4, FIELD_IP, 15, NULL },
+    { NULL, "HOSTNAME",                 15, FIELD_STR, 15, NULL },
+    { NULL, "DOMAINNAME",               15, FIELD_STR, 15, NULL },
+    { NULL, "DISCOVERADDR",             4,  FIELD_IP, 15, NULL },
+    { NULL, "LEASETIME",                4,  FIELD_HEX, 8, NULL },
+    { NULL, "MESSAGETYPE",              1,  FIELD_HEX, 2, NULL },
+    { NULL, "SERVIDENT",                4, FIELD_IP, 15, NULL },
+    { NULL, "MESSAGE",                 15,  FIELD_STR, 15, NULL },
+    { NULL, "RENEWTIME",                4,  FIELD_HEX, 8, NULL },
+    { NULL, "REBINDTIME",               4,  FIELD_HEX, 8, NULL },
+    { NULL, "CLASSID",                 15, FIELD_STR, 15, NULL },
+    { NULL, "END",                      3, FIELD_STR, 3, NULL },
 };
 
 static const struct tuple_type_desc dhcp_opcode[] = {
@@ -242,70 +242,70 @@ static const struct tuple_type_desc dhcp_tlv_desc[] = {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param dhcp_comm_params[] = {
-    { DHCP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { DHCP_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DHCP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { DHCP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DHCP_SIP, "ipsource",  "SIP", 4, 0, 0, FIELD_IP, "Set source IP address", 
+    { DHCP_SIP, "ipsource",  "SIP", 4,  FIELD_IP, "Set source IP address", 
                                         " A.A.A.A    IPv4 address", 15, 2, 1, NULL, NULL },                
-    { DHCP_DIP, "ipdest",    "DIP", 4, 0, 0, FIELD_IP, "Set destination IP address", 
+    { DHCP_DIP, "ipdest",    "DIP", 4,  FIELD_IP, "Set destination IP address", 
                                         " A.A.A.A    IPv4 address", 15, 2, 1, NULL, NULL },
-    { DHCP_SPORT, "sport",     "SPort", 2, 0, 65535, FIELD_DEC, "Set UDP source port", 
+    { DHCP_SPORT, "sport",     "SPort", 2,  FIELD_DEC, "Set UDP source port", 
                                         " <0-65535>    UDP source port", 5, 2, 0, NULL, dhcp_port },
-    { DHCP_DPORT, "dport",     "DPort", 2, 0, 65535, FIELD_DEC, "Set UDP destination port", 
+    { DHCP_DPORT, "dport",     "DPort", 2,  FIELD_DEC, "Set UDP destination port", 
                                         " <0-65535>    UDP destination port", 5, 2, 0, NULL, dhcp_port },
-    { DHCP_OP, "opcode",    "Op", 1, 0, 255, FIELD_HEX, "Set dhcp operation code", 
+    { DHCP_OP, "opcode",    "Op", 1,  FIELD_HEX, "Set dhcp operation code", 
                                         " <00-FF>    host dynamic configuration operation code", 2, 3, 0, NULL, NULL },
-    { DHCP_HTYPE, "htype",     "Htype", 1, 0, 255, FIELD_HEX, "Set dhcp htype", 
+    { DHCP_HTYPE, "htype",     "Htype", 1, FIELD_HEX, "Set dhcp htype", 
                                         " <00-FF>    dhcp htype", 2, 3, 0, NULL, dhcp_htype },
-    { DHCP_HLEN, "hlen",      "HLEN", 1, 0, 255, FIELD_HEX, "Set dhcp hlen", 
+    { DHCP_HLEN, "hlen",      "HLEN", 1,  FIELD_HEX, "Set dhcp hlen", 
                                         " <00-FF>    dhcp hlen", 2, 3, 0, NULL, NULL },
-    { DHCP_HOPS, "hops",      "Hops", 1, 0, 255, FIELD_HEX, "Set dhcp hops", 
+    { DHCP_HOPS, "hops",      "Hops", 1, FIELD_HEX, "Set dhcp hops", 
                                         " <00-FF>    dhcp hops", 2, 3, 0, NULL, NULL },
-    { DHCP_XID, "xid",       "Xid", 4, 0, 0xFFFFFFFF, FIELD_HEX, "Set dhcp xid", 
+    { DHCP_XID, "xid",       "Xid", 4, FIELD_HEX, "Set dhcp xid", 
                                         " <00-FFFFFFFF>    dhcp xid", 8, 3, 0, NULL, NULL },
-    { DHCP_SECS, "secs",      "Secs", 2, 0, 65535, FIELD_HEX, "Set dhcp secs", 
+    { DHCP_SECS, "secs",      "Secs", 2,  FIELD_HEX, "Set dhcp secs", 
                                         " <00-FFFF>    dhcp secs", 4, 3, 0, NULL, NULL },
-    { DHCP_FLAGS, "flags",     "Flags", 2, 0, 65535, FIELD_HEX, "Set dhcp flags", 
+    { DHCP_FLAGS, "flags",     "Flags", 2,FIELD_HEX, "Set dhcp flags", 
                                         " <00-FFFF>    dhcp flags", 4, 3, 0, NULL, NULL },
-    { DHCP_CIADDR, "ci",        "CI", 4, 0, 0, FIELD_IP, "Set ci IP address", 
+    { DHCP_CIADDR, "ci",        "CI", 4, FIELD_IP, "Set ci IP address", 
                                         " A.A.A.A    IPv4 address", 15, 4, 0, NULL, NULL },                
-    { DHCP_YIADDR, "yi",        "YI", 4, 0, 0, FIELD_IP, "Set yi IP address", 
+    { DHCP_YIADDR, "yi",        "YI", 4, FIELD_IP, "Set yi IP address", 
                                         " A.A.A.A    IPv4 address", 15, 4, 0, NULL, NULL },
-    { DHCP_SIADDR, "si",        "SI", 4, 0, 0, FIELD_IP, "Set si IP address", 
+    { DHCP_SIADDR, "si",        "SI", 4, FIELD_IP, "Set si IP address", 
                                         " A.A.A.A    IPv4 address", 15, 4, 0, NULL, NULL },                
-    { DHCP_GIADDR, "gi",        "GI", 4, 0, 0, FIELD_IP, "Set gi IP address", 
+    { DHCP_GIADDR, "gi",        "GI", 4,  FIELD_IP, "Set gi IP address", 
                                         " A.A.A.A    IPv4 address", 15, 4, 0, NULL, NULL },                
-    { DHCP_CHADDR, "ch",        "CH", 6, 0, 0, FIELD_MAC, "Set ch MAC address", 
+    { DHCP_CHADDR, "ch",        "CH", 6,  FIELD_MAC, "Set ch MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 5, 0, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    /* { "fname",     "Filename", MAX_FNAME, 0, 0, FIELD_STR, "Set boot file name", 
+    /* { "fname",     "Filename", MAX_FNAME,  FIELD_STR, "Set boot file name", 
                                         " WORD    Boot file name", MAX_FNAME, NULL },*/
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL },
-    /* { "sname",     "Sname", MAX_SNAME, 0, 0, FIELD_STR, "Set server hostname", 
+    /* { "sname",     "Sname", MAX_SNAME, FIELD_STR, "Set server hostname", 
                                         " WORD    Server hostname", MAX_SNAME, NULL },*/
-    { DHCP_TLV, "tlv",       "TLV", 0, 0, 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
+    { DHCP_TLV, "tlv",       "TLV", 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
 };
 
 struct commands_param_extra dhcp_params_tlv[] = {
 /*    { LIBNET_DHCP_PAD,             "PAD" },*/           
-    { LIBNET_DHCP_SUBNETMASK,      "subnetmask", "SubnetMask", 4, 0, 0, FIELD_IP, "Set SubnetMaskr", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_SUBNETMASK,      "subnetmask", "SubnetMask", 4, FIELD_IP, "Set SubnetMaskr", " A.A.A.A IPv4 address", 15, 0, NULL },         
 /*    { LIBNET_DHCP_TIMEOFFSET,      "TIMEOFFSET" },    */ 
-    { LIBNET_DHCP_ROUTER,          "router", "Router", 4, 0, 0, FIELD_IP, "Set Router", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_TIMESERVER,      "timeserver", "TimeServer", 4, 0, 0, FIELD_IP, "Set TimeServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_NAMESERVER,      "namserver", "NameServer", 4, 0, 0, FIELD_IP, "Set NameServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_DNS,             "dns", "DNS", 4, 0, 0, FIELD_IP, "Set DNS", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_LOGSERV,         "logserver", "LogServer", 4, 0, 0, FIELD_IP, "Set LogServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_COOKIESERV,      "cookieserver", "CookieServer", 4, 0, 0, FIELD_IP, "Set CookieServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_LPRSERV,         "lprserver", "LPRServer", 4, 0, 0, FIELD_IP, "Set LPRServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_IMPSERV,         "impserver", "Impserver", 4, 0, 0, FIELD_IP, "Set ImpServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_RESSERV,         "resserver", "ResServer", 4, 0, 0, FIELD_IP, "Set ResServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
-    { LIBNET_DHCP_HOSTNAME,        "hostname", "HostName", MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set HostName", " WORD HostName", MAX_STRING_SIZE, 0, NULL },     
+    { LIBNET_DHCP_ROUTER,          "router", "Router", 4, FIELD_IP, "Set Router", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_TIMESERVER,      "timeserver", "TimeServer", 4, FIELD_IP, "Set TimeServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_NAMESERVER,      "namserver", "NameServer", 4, FIELD_IP, "Set NameServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_DNS,             "dns", "DNS", 4, FIELD_IP, "Set DNS", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_LOGSERV,         "logserver", "LogServer", 4, FIELD_IP, "Set LogServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_COOKIESERV,      "cookieserver", "CookieServer", 4, FIELD_IP, "Set CookieServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_LPRSERV,         "lprserver", "LPRServer", 4, FIELD_IP, "Set LPRServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_IMPSERV,         "impserver", "Impserver", 4, FIELD_IP, "Set ImpServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_RESSERV,         "resserver", "ResServer", 4, FIELD_IP, "Set ResServer", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_HOSTNAME,        "hostname", "HostName", MAX_STRING_SIZE, FIELD_STR, "Set HostName", " WORD HostName", MAX_STRING_SIZE, 0, NULL },     
 /*    { LIBNET_DHCP_BOOTFILESIZE,    "BOOTFILESIZE" },   
     { LIBNET_DHCP_DUMPFILE,        "DUMPFILE" },      */ 
-    { LIBNET_DHCP_DOMAINNAME,      "domainname", "DomainName", MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set DomainName", " WORD DomainName", MAX_STRING_SIZE, 0, NULL },     
+    { LIBNET_DHCP_DOMAINNAME,      "domainname", "DomainName", MAX_STRING_SIZE, FIELD_STR, "Set DomainName", " WORD DomainName", MAX_STRING_SIZE, 0, NULL },     
 /*    { LIBNET_DHCP_SWAPSERV,        "SWAPSERV" },       
     { LIBNET_DHCP_ROOTPATH,        "ROOTPATH" },       
     { LIBNET_DHCP_EXTENPATH,       "EXTENPATH" },      
@@ -341,16 +341,16 @@ struct commands_param_extra dhcp_params_tlv[] = {
     { LIBNET_DHCP_XFONT,           "XFONT" },         
     { LIBNET_DHCP_XDISPLAYMGR,     "XDISPLAYMGR" },   
     { LIBNET_DHCP_DISCOVERADDR,    "DISCOVERADDR" }, */ 
-    { LIBNET_DHCP_LEASETIME,       "leasetime", "LeaseTime", 4, 0, 0xFFFFFFFF, FIELD_HEX, "Set LeaseTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
+    { LIBNET_DHCP_LEASETIME,       "leasetime", "LeaseTime", 4, FIELD_HEX, "Set LeaseTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
 /*    { LIBNET_DHCP_OPTIONOVERLOAD,  "OPTIONOVERLOAD" },*/
-    { LIBNET_DHCP_MESSAGETYPE,     "messagetype", "MessageType", 1, 0, 0xFF, FIELD_HEX, "Set MessageType", " <0x00 - 0xFF>", 2, 1, dhcp_message },
-    { LIBNET_DHCP_SERVIDENT,       "servident", "ServIdent", 4, 0, 0, FIELD_IP, "Set ServIdent", " A.A.A.A IPv4 address", 15, 0, NULL },         
+    { LIBNET_DHCP_MESSAGETYPE,     "messagetype", "MessageType", 1, FIELD_HEX, "Set MessageType", " <0x00 - 0xFF>", 2, 1, dhcp_message },
+    { LIBNET_DHCP_SERVIDENT,       "servident", "ServIdent", 4, FIELD_IP, "Set ServIdent", " A.A.A.A IPv4 address", 15, 0, NULL },         
 /*    { LIBNET_DHCP_PARAMREQUEST,    "PARAMREQUEST" },  
     { LIBNET_DHCP_MESSAGE,         "MESSAGE" },       
     { LIBNET_DHCP_MAXMSGSIZE,      "MAXMSGSIZE" },*/    
-    { LIBNET_DHCP_RENEWTIME,       "renewtime", "RenewTime", 4, 0, 0xFFFFFFFF, FIELD_HEX, "Set RenewTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
-    { LIBNET_DHCP_REBINDTIME,      "rebindtime", "RebindTime", 4, 0, 0xFFFFFFFF, FIELD_HEX, "Set RebindTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
-    { LIBNET_DHCP_CLASSSID,         "classsid", "ClassSID", MAX_STRING_SIZE, 0, 0, FIELD_STR, "Set ClassSID", " WORD ClassSID", MAX_STRING_SIZE, 0, NULL },     
+    { LIBNET_DHCP_RENEWTIME,       "renewtime", "RenewTime", 4, FIELD_HEX, "Set RenewTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
+    { LIBNET_DHCP_REBINDTIME,      "rebindtime", "RebindTime", 4, FIELD_HEX, "Set RebindTime", " <0x00000000 - 0xFFFFFFFF", 8, 0, NULL },     
+    { LIBNET_DHCP_CLASSSID,         "classsid", "ClassSID", MAX_STRING_SIZE, FIELD_STR, "Set ClassSID", " WORD ClassSID", MAX_STRING_SIZE, 0, NULL },     
 /*    { LIBNET_DHCP_CLIENTID,        "CLIENTID" },      
     { LIBNET_DHCP_NISPLUSDOMAIN,   "NISPLUSDOMAIN" }, 
     { LIBNET_DHCP_NISPLUSSERVERS,  "NISPLUSSERVERS" }, 
@@ -363,7 +363,7 @@ struct commands_param_extra dhcp_params_tlv[] = {
     { LIBNET_DHCP_IRCSERVER,       "IRCSERVER" },     
     { LIBNET_DHCP_STSERVER,        "STSERVER" },      
     { LIBNET_DHCP_STDASERVER,      "STDASERVER" },   */ 
-    { LIBNET_DHCP_END,             "end", "End", 0, 0, 0, FIELD_HEX, "Set End", "", 0, 0, NULL }
+    { LIBNET_DHCP_END,             "end", "End", 0, FIELD_HEX, "Set End", "", 0, 0, NULL }
 };
 
 
@@ -398,15 +398,15 @@ void   dhcp_th_dos_send_release_exit(struct attacks *);
 #define DHCP_ROGUE_DOMAIN     8
 
 static struct attack_param dhcp_rogue_server_params[] = {
-    { NULL, "Server ID",               4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Start IP",                4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "End IP",                  4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Lease Time (secs)",       4, 0, 0xFFFFFFFF, FIELD_HEX,  8, NULL },
-    { NULL, "Renew Time (secs)",       4, 0, 0xFFFFFFFF, FIELD_HEX,  8, NULL },
-    { NULL, "Subnet Mask",             4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Router",                  4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "DNS Server",              4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Domain",                  15, 0,   0, FIELD_STR, 15, NULL }
+    { NULL, "Server ID",               4, FIELD_IP,  15, NULL },
+    { NULL, "Start IP",                4, FIELD_IP,  15, NULL },
+    { NULL, "End IP",                  4, FIELD_IP,  15, NULL },
+    { NULL, "Lease Time (secs)",       4, FIELD_HEX,  8, NULL },
+    { NULL, "Renew Time (secs)",       4, FIELD_HEX,  8, NULL },
+    { NULL, "Subnet Mask",             4, FIELD_IP,  15, NULL },
+    { NULL, "Router",                  4, FIELD_IP,  15, NULL },
+    { NULL, "DNS Server",              4, FIELD_IP,  15, NULL },
+    { NULL, "Domain",                  15, FIELD_STR, 15, NULL }
 };
 
 #define DHCP_DOS_SEND_RELEASE_SERVER     0
@@ -414,9 +414,9 @@ static struct attack_param dhcp_rogue_server_params[] = {
 #define DHCP_DOS_SEND_RELEASE_END_IP     2 
 
 static struct attack_param dhcp_dos_send_release_params[] = {
-    { NULL, "Server ID",               4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "Start IP",                4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "End IP",                  4, 0,    0, FIELD_IP,  15, NULL }
+    { NULL, "Server ID",               4, FIELD_IP,  15, NULL },
+    { NULL, "Start IP",                4, FIELD_IP,  15, NULL },
+    { NULL, "End IP",                  4, FIELD_IP,  15, NULL }
 };
 
 #define DHCP_ATTACK_SEND_RAW           0
@@ -464,6 +464,7 @@ int8_t dhcp_end(struct term_node *);
 extern void   thread_libnet_error( char *, libnet_t *);
 extern int8_t vrfy_bridge_id( char *, u_int8_t * );
 extern int8_t parser_get_formated_inet_address(u_int32_t, char *, u_int16_t);
+extern int8_t parser_get_formated_inet_address_fill(u_int32_t, char *, u_int16_t, int8_t);
 extern int8_t thread_create(pthread_t *, void *, void *);
 extern void   write_log( u_int16_t mode, char *msg, ... );
 extern int8_t attack_th_exit(struct attacks *);

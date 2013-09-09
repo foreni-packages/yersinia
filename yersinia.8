@@ -2,20 +2,20 @@
 .\" =====================
 .\" Authors: Alfredo and David
 .\" 
-.\" $Id: yersinia.8 22 2007-01-26 19:22:14Z tomac $
+.\" $Id: yersinia.8 43 2007-04-27 11:07:17Z slay $
 .\" 
 .\" 
-.TH "YERSINIA" "8" "$Date: 2006/02/17 22:48:40 $" "Yersinia v0.7" ""
+.TH "YERSINIA" "8" "$Date: 2007/04/28 22:48:40 $" "Yersinia v0.7" ""
 .SH "NAME "
 .B Yersinia
-\- A FrameWork for layer 2 attacks
+\- A Framework for layer 2 attacks
 
 .SH "SYNOPSIS "
 \fByersinia\fR 
 [\fB\-hVGIDd\fR] [\fB\-l\fR \fIlogfile\fR] [\fB\-c\fR \fIconffile\fR] \fIprotocol\fR [\-M] [\fIprotocol_options\fR]
 .SH "DESCRIPTION "
 .B yersinia
-is a framework for performing layer 2 attacks. The following protocols have been implemented in Yersinia current version: \fISpanning Tree Protocol (STP)\fR, \fIVLAN Trunking Protocol (VTP)\fR, \fIHot Standby Router Protocol (HSRP)\fR, \fIDynamic Trunking Protocol (DTP)\fR, \fIIEEE 802.1Q\fR, \fICisco Discovery Protocol (CDP)\fR, \fIDynamic Host Configuration Protocol (DHCP)\fR and, finally, the \fIInter-Switch Link Protocol (ISL)\fR. 
+is a framework for performing layer 2 attacks. The following protocols have been implemented in Yersinia current version: \fISpanning Tree Protocol (STP)\fR, \fIVLAN Trunking Protocol (VTP)\fR, \fIHot Standby Router Protocol (HSRP)\fR, \fIDynamic Trunking Protocol (DTP)\fR, \fIIEEE 802.1Q\fR, \fIIEEE 802.1X\fR, \fICisco Discovery Protocol (CDP)\fR, \fIDynamic Host Configuration Protocol (DHCP)\fR, \fIInter-Switch Link Protocol (ISL)\fR and \fIMultiProtocol Label Switching (MPLS)\fR. 
 
 Some of the attacks implemented will cause a DoS in a network, other will help to perform any other more advanced attack, or both. In addition, some of them will be first released to the public since there isn't any public implementation. 
 
@@ -54,6 +54,8 @@ The following protocols are implemented in \fByersinia\fR current version:
 .IP "\fIIEEE 802.1Q\fR"
 .IP "\fIVLAN Trunking Protocol (VTP)\fR"
 .IP "\fIInter-Switch Link Protocol (ISL)\fR"
+.IP "\fIIEEE 802.1X\fR"
+.IP "\fIMultiProtocol Label Switching (MPLS)\fR"
 .SH "PROTOCOLS OPTIONS"
 .TP 
 \fBSpanning Tree Protocol (STP):\fR is a link management protocol that provides path redundancy while preventing undesirable loops in the network. The supported options are:
@@ -147,22 +149,131 @@ Attack to launch
 
 .TP 
 \fBHot Standby Router Protocol (HSRP):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
 .TP 
 \fBInter-Switch Link Protocol (ISL):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
 .TP 
 \fBVLAN Trunking Protocol (VTP):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
 .TP 
 \fBDynamic Host Configuration Protocol (DHCP):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
 .TP 
 \fBIEEE 802.1Q:\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
 .TP 
 \fBDynamic Trunking Protocol (DTP):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
 
+.TP 
+\fBIEEE 802.1X:\fR
+.IP "\fB\-version\fR \fIarg\fR"  
+Version
+.IP "\fB\-type\fR \fIarg\fR"  
+xxxx
+.IP "\fB\-eapcode\fR \fIarg\fR" 
+xxxx
+.IP "\fB\-eapid\fR \fIarg\fR"  
+xxxx
+.IP "\fB\-eaptype\fR \fIarg\fR"  
+xxxx
+.IP "\fB\-eapinfo\fR \fIarg\fR"  
+xxx
+.IP "\fB\-interface\fR \fIarg\fR" 
+xxxx
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
+
+.TP 
+\fBMultiProtocol Label Switching (MPLS):\fR
+.IP "\fB\-source\fR \fIhw_addr\fR" 
+Source MAC address
+.IP "\fB\-dest\fR \fIhw_addr\fR"
+Destination MAC address
+.IP "\fB\-interface\fR \fIiface\fR"
+Set network interface to use
+.IP "\fB\-attack\fR \fIattack\fR"
+Attack to launch
+.IP "\fB\-label1\fR \fIarg\fR"
+Set MPLS Label
+.IP "\fB\-exp1\fR \fIarg\fR" 
+Set MPLS Experimental bits
+.IP "\fB\-bottom1\fR \fIarg\fR"
+Set MPLS Bottom Of Stack flag
+.IP "\fB\-ttl1\fR \fIarg\fR" 
+Set MPLS Time To Live
+.IP "\fB\-label2\fR \fIarg\fR"
+Set MPLS Label (second header)
+.IP "\fB\-exp2\fR \fIarg\fR"
+Set MPLS Experimental bits (second header)
+.IP "\fB\-bottom2\fR \fIarg\fR" 
+Set MPLS Bottom Of Stack flag (second header)
+.IP "\fB\-ttl2\fR \fIarg\fR" 
+Set MPLS Time To Live (second header)
+.IP "\fB\-ipsource\fR \fIipv4\fR" 
+Source IP
+.IP "\fB\-portsource\fR \fIport\fR" 
+Source TCP/UDP port
+.IP "\fB\-ipdest\fR \fIipv4\fR" 
+Destination IP
+.IP "\fB\-portdest\fR \fIport\fR" 
+Destination TCP/UDP port
+.IP "\fB\-payload\fR \fIASCII\fR"
+ASCII IP payload
 
 .SH "ATTACKS"
 .TP 
@@ -211,12 +322,27 @@ Attack to launch
 .IP "    1: DOS attack deleting all VTP vlans"
 .IP "    2: DOS attack deleting one vlan"
 .IP "    3: NONDOS attack adding one vlan"
-.IP "    4: DOS attack Catalyst zero day"
+.IP "    4: DOS attack crashing Catalyst"
+
+.TP 
+\fBAttacks Implemented in 802.1X:\fR
+.IP "    0: NONDOS attack sending 802.1X packet"
+.IP "    1: NONDOS attack Mitm 802.1X with 2 interfaces"
+
+.TP 
+\fBAttacks Implemented in MPLS:\fR
+.IP "    0: NONDOS attack sending TCP MPLS packet"
+.IP "    1: NONDOS attack sending TCP MPLS with double header"
+.IP "    2: NONDOS attack sending UDP MPLS packet"
+.IP "    3: NONDOS attack sending UDP MPLS with double header"
+.IP "    4: NONDOS attack sending ICMP MPLS packet"
+.IP "    5: NONDOS attack sending ICMP MPLS with double header"
 
 .TP 
 \fBAttacks Implemented in ISL:\fR
 .IP "    None at the moment"
 
+ 
 .SH "GTK GUI"
 The \fIGTK GUI\fR (\fB\-G\fR) is a GTK graphical interface with all of the \fByersinia\fR powerful features and a professional 'look and feel'.
 

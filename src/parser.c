@@ -2,8 +2,8 @@
  * Main command line parser and parser utilities
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-"$Id: parser.c 14 2006-04-10 20:37:51Z tomac $";
+"$Id: parser.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -429,9 +429,33 @@ parser_get_formated_inet_address(u_int32_t in, char *inet, u_int16_t inet_len)
 
     aux_long = htonl(in);
     p = (char *)&aux_long;
-    if (snprintf(inet, inet_len, "%03d.%03d.%03d.%03d",
+        if (snprintf(inet, inet_len,"%03d.%03d.%03d.%03d",
             (p[0] & 255), (p[1] & 255), (p[2] & 255), (p[3] & 255)) < 0)
         return -1;
+    return 0;
+}
+
+int8_t
+parser_get_formated_inet_address_fill(u_int32_t in, char *inet, u_int16_t inet_len, int8_t fill_up)
+{
+    char *p;
+    u_int32_t aux_long;
+
+    aux_long = htonl(in);
+    p = (char *)&aux_long;
+    if (fill_up)
+    {
+        if (snprintf(inet, inet_len,"%03d.%03d.%03d.%03d",
+            (p[0] & 255), (p[1] & 255), (p[2] & 255), (p[3] & 255)) < 0)
+        return -1;
+    }
+    else
+    {
+        if (snprintf(inet, inet_len,"%d.%d.%d.%d",
+            (p[0] & 255), (p[1] & 255), (p[2] & 255), (p[3] & 255)) < 0)
+        return -1;
+    }
+    
     return 0;
 }
 
@@ -846,8 +870,10 @@ parser_read_config_file(struct term_tty *tty, struct term_node *node)
                   /* Trim the \n */
                   if (ptr[strlen(ptr) - 1] == '\n')
                      ptr[strlen(ptr) - 1] = '\0';
-                  write_log(0, "tengo %s, %d, %s, %d, %d, %d\n", params[i].ldesc, params[i].type, ptr, params[i].size_print, params[i].min, params[i].max);
-                  if ((strlen(ptr)) && (parser_filter_param(params[i].type, node->protocol[proto].commands_param[i], ptr, params[i].size_print, params[i].min, params[i].max) < 0))
+                  write_log(0, "tengo %s, %d, %s, %d\n", params[i].ldesc, params[i].type, ptr, params[i].size_print);
+                  if ((strlen(ptr)) && 
+                      (parser_filter_param(params[i].type, node->protocol[proto].commands_param[i], ptr, 
+                                           params[i].size_print,params[i].size) < 0))
                   {
                      write_log(0, "Error when parsing %s: %s\n", params[i].ldesc, ptr);
                      return -1;
@@ -892,7 +918,7 @@ parser_write_config_file(struct term_tty *tty)
       return -1;
    }
 
-   fputs("# $Id: parser.c 14 2006-04-10 20:37:51Z tomac $\n", file);
+   fputs("# $Id: parser.c 46 2007-05-08 09:13:30Z slay $\n", file);
    fputs("#\n", file);
    fputs("# Yersinia configuration file example\n", file);
    fputs("#\n", file);
@@ -1343,17 +1369,17 @@ parser_free_ip2filter(struct filter *ipfilter)
  */
 int8_t 
 parser_filter_param(u_int8_t type, void *value, char *printable, 
-                    u_int16_t size_print, int32_t min, int32_t max)
+                    u_int16_t size_print, u_int16_t size)
 {
-   u_int8_t i, *bytes, j, data = 3;
+   u_int8_t i, *bytes, j;
    char tmp[3];
    char *temp;
-   int8_t iface;
+//   int8_t iface;
    u_int16_t end, len, len2;
    u_int32_t aux_ip;
    struct in_addr addr;
 
-//write_log(0, "tipe es %d, value %s, printable %s, size %d, min %d y max %d\n", type, value, printable, size_print, min, max);
+//write_log(0, "tipe es %d, value %s, printable %s, size %d\n", type, value, printable, size_print);
    if (type == FIELD_TLV)
       return 0;
 
@@ -1391,56 +1417,31 @@ parser_filter_param(u_int8_t type, void *value, char *printable,
             switch(size_print)
             {
                case 2:
-                  data=1;
                   *((u_int8_t *)(value)) = strtoul(printable, (char **)NULL, 16);
                   break;
                case 4:
-                  data=2;
                   *((u_int16_t *)(value)) = strtoul(printable, (char **)NULL, 16);
                   break;
                default:
-                  data=3;
                   *((u_int32_t *)(value)) = strtoul(printable, (char **)NULL, 16);
                   break;
             }
          }
          else
          {
-            if (max<=255)
+            if (size==1)
             {
-               data=1;
                *((u_int8_t *)(value)) = strtoul(printable, (char **)NULL, 10);
             }
             else
-               if (max<=0xFFFF)
+               if (size==2)
                {
-                  data=2;
                   *((u_int16_t *)(value)) = strtoul(printable, (char **)NULL, 10);
                }
                else
                {
-                  data=3; 
                   *((u_int32_t *)(value)) = strtoul(printable, (char **)NULL, 10);
                }
-         }
-
-         switch(data)
-         {
-            case 1:
-               if ( (*((u_int8_t *)value) < min) ||
-                     (*((u_int8_t *)value) > max))
-                  return -1;           
-               break;
-            case 2:
-               if ( (*((u_int16_t *)value) < min) ||
-                     (*((u_int16_t *)value) > max))
-                  return -1;
-               break;
-            case 3:
-               if ( (*((u_int32_t *)value) < min) ||
-                     (*((u_int32_t *)value) > max))
-                  return -1;
-               break;
          }
          break;
 
@@ -1705,8 +1706,7 @@ parser_cl_proto( struct term_node *node, int8_t argc, char **args, u_int8_t prot
                                               node->protocol[proto].commands_param[j],
                                               *(aux_args+1),
                                               comm_par[j].size_print,
-                                              comm_par[j].min,
-                                              comm_par[j].max);
+                                              comm_par[j].size);
 
                   if (fail == -1)
                   {
@@ -1827,13 +1827,13 @@ parser_binary2printable(u_int8_t proto, u_int8_t elem, void *value, char *msg)
          break;
 
       case FIELD_DEC:
-         if (params[elem].max <= 255)
+         if (params[elem].size == 1)
          {
             aux8 = (u_int8_t *) value;
             snprintf(msg, 4 ,"%d",*aux8);
          }
          else
-            if (params[elem].max <= 0xFFFF)
+            if (params[elem].size == 2)
             {
                aux16 = (u_int16_t *) value;
                snprintf(msg, 6,"%d",*aux16);

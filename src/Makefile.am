@@ -1,4 +1,4 @@
-# $Id: Makefile.am 2 2006-04-03 21:04:25Z tomac $
+# $Id: Makefile.am 43 2007-04-27 11:07:17Z slay $
 
 AUTOMAKE_OPTIONS = no-dependencies
 
@@ -13,10 +13,10 @@ bin_PROGRAMS = yersinia
 yersinia_SOURCES = xstp.c parser.c dtp.c dtp.h\
 parser.h xstp.h global.h cdp.c cdp.h dhcp.c dhcp.h\
 hsrp.h hsrp.c dot1q.h dot1q.c vtp.h vtp.c arp.h arp.c isl.h isl.c\
-dot1x.h dot1x.c thread-util.h thread-util.c terminal.c\
-terminal.h terminal-defs.h\
-interfaces.h interfaces.c attack.h attack.c yersinia.h yersinia.c\
-md5.c md5.h md5-sum.c md5-sum.h protocols.h protocols.c dlist.h dlist.c
+dot1x.h dot1x.c mpls.c mpls.h thread-util.h thread-util.c\
+terminal.c terminal.h terminal-defs.h interfaces.h interfaces.c\
+attack.h attack.c yersinia.h yersinia.c md5.c md5.h md5-sum.c\
+md5-sum.h protocols.h protocols.c dlist.h dlist.c 
 
 if HAS_CURSES
   INCLUDES += $(CURSES_INCLUDEDIR)

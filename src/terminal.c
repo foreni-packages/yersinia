@@ -2,8 +2,8 @@
  * Implementation of network terminal management
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-       "$Id: terminal.c 2 2006-04-03 21:04:25Z tomac $";
+       "$Id: terminal.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -1025,9 +1025,7 @@ term_vty_do_command(struct term_node *node)
                                                  vty->attack_param[vty->substate].value,
                                                  vty->attack_param[vty->substate].print,
                                                  vty->attack_param[vty->substate].size_print,
-                                                 vty->attack_param[vty->substate].min,
-                                                 vty->attack_param[vty->substate].max
-                            ) < 0 )
+                                                 vty->attack_param[vty->substate].size ) < 0 )
 
                          {
                              term_vty_free_words(warray);                         

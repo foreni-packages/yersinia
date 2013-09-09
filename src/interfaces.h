@@ -1,11 +1,11 @@
 /* interfaces.h
  * Definitions for network interfaces and capturing packets
  *
- * $Id: interfaces.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: interfaces.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@
 
 #define PROMISC   1
 #define TIMEOUT   500
-#define FILTER    "stp || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2000) || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2004) || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2003) || (udp and (port 1985 or port 68 or port 67)) || arp || vlan || (ether[14]=0xaa and ether[15]=0xaa and ether[0]=0x01 and ether[1]=0x00 and ether[2]=0x0c and ether[3]=0x00 and ether[4]=0x00) || (ether[0]=0x01 and ether[1]=0x80 and ether[2]=0xc2 and ether[12:2] = 0x888e)"
+#define FILTER    "stp || (udp and (port 1985 or port 68 or port 67)) || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2000) || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2004) || (ether host 01:00:0c:cc:cc:cc and ether[20:2] = 0x2003) || arp || vlan || (ether[14]=0xaa and ether[15]=0xaa and ether[0]=0x01 and ether[1]=0x00 and ether[2]=0x0c and ether[3]=0x00 and ether[4]=0x00) || (ether[0]=0x01 and ether[1]=0x80 and ether[2]=0xc2 and ether[12:2] = 0x888e) || mpls"
 
 /* Fields for recognizing packets */
 #define F_ETHERTYPE 1 
