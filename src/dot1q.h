@@ -1,11 +1,11 @@
 /* dot1q.h
  * Definitions for IEEE 802.1Q
  *
- * $Id: dot1q.h 6 2006-04-04 10:43:25Z slay $ 
+ * $Id: dot1q.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ struct dot1q_data {
 
 static const struct tuple_type_desc dot1q_tpi[] = {
      { ETHERTYPE_IP,     "IP"   },
-     { ETHERTYPE_VLAN,   ".1Q"  },
+     { ETHERTYPE_VLAN,   "802.1Q"  },
      { ETHERTYPE_ARP,    "ARP"  },
      { ETHERTYPE_REVARP, "RARP" },
      { 0x2000,           "CDP"  },
@@ -110,37 +110,37 @@ static struct proto_features dot1q_features[] = {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param dot1q_comm_params[] = {
-    { DOT1Q_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { DOT1Q_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DOT1Q_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { DOT1Q_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DOT1Q_VLAN1, "vlan1",     "VLAN", 2, 0, 4095, FIELD_DEC, "Set 802.1Q vlan1 (outer) ID", 
+    { DOT1Q_VLAN1, "vlan1",     "VLAN", 2,  FIELD_DEC, "Set 802.1Q vlan1 (outer) ID", 
                                         " <0-4095>    Outer vlan id", 4, 2, 1, NULL, NULL },
-    { DOT1Q_PRIORITY1, "priority1", "Priority", 1, 0, 7, FIELD_DEC, "Set 802.1Q vlan1 (outer) priority", 
+    { DOT1Q_PRIORITY1, "priority1", "Priority", 1, FIELD_DEC, "Set 802.1Q vlan1 (outer) priority", 
                                         " <0-7>    Priority", 2, 2, 0, NULL, NULL },
-    { DOT1Q_CFI1, "cfi1",      "CFI", 1, 0, 255, FIELD_HEX, "Set 802.1Q cfi1 (outer) ID", 
+    { DOT1Q_CFI1, "cfi1",      "CFI", 1, FIELD_HEX, "Set 802.1Q cfi1 (outer) ID", 
                                         " <0-FF>     CFI1 id", 2, 2, 0, NULL, NULL },
-    { DOT1Q_TPI2,   "l2proto1",     "L2Proto1", 2, 0, 0xffff, FIELD_HEX, "Set 802.1Q L2 protocol1", 
+    { DOT1Q_TPI2,   "l2proto1",     "L2Proto1", 2, FIELD_HEX, "Set 802.1Q L2 protocol1", 
                                         " <0-FFFF>    Protocol", 4, 2, 1, NULL, dot1q_tpi },
-    { DOT1Q_VLAN2, "vlan2",     "VLAN2", 2, 0, 4095, FIELD_DEC, "Set 802.1Q vlan1 (outer) ID", 
+    { DOT1Q_VLAN2, "vlan2",     "VLAN2", 2, FIELD_DEC, "Set 802.1Q vlan1 (outer) ID", 
                                         " <0-4095>    Inner vlan id", 4, 2, 0, NULL, NULL },
-    { DOT1Q_PRIORITY2, "priority2", "Priority", 1, 0, 7, FIELD_DEC, "Set 802.1Q vlan2 (inner) priority", 
+    { DOT1Q_PRIORITY2, "priority2", "Priority", 1, FIELD_DEC, "Set 802.1Q vlan2 (inner) priority", 
                                         " <0-7>    Priority", 2, 2, 0, NULL, NULL },
-    { DOT1Q_CFI2, "cfi2",      "CFI", 1, 0, 255, FIELD_HEX, "Set 802.1Q cfi2 (inner) ID", 
+    { DOT1Q_CFI2, "cfi2",      "CFI", 1, FIELD_HEX, "Set 802.1Q cfi2 (inner) ID", 
                                         " <0-FF>     CFI2 id", 2, 2, 0, NULL, NULL },
-    { DOT1Q_TPI3,   "l2proto2",     "L2Proto2", 2, 0, 0xffff, FIELD_HEX, "Set 802.1Q L2 protocol2", 
+    { DOT1Q_TPI3,   "l2proto2",     "L2Proto2", 2, FIELD_HEX, "Set 802.1Q L2 protocol2", 
                                         " <0-FFFF>    Protocol", 4, 3, 0, NULL, dot1q_tpi },
-    { DOT1Q_SRC_IP, "ipsource",  "Src IP", 4, 0, 0, FIELD_IP, "Set 802.1Q IP source data address", 
+    { DOT1Q_SRC_IP, "ipsource",  "Src IP", 4, FIELD_IP, "Set 802.1Q IP source data address", 
                                         " A.A.A.A    IPv4 address", 15, 3, 1, NULL, NULL },                
-    { DOT1Q_DST_IP, "ipdest",    "Dst IP", 4, 0, 0, FIELD_IP, "Set 802.1Q IP destination data address", 
+    { DOT1Q_DST_IP, "ipdest",    "Dst IP", 4, FIELD_IP, "Set 802.1Q IP destination data address", 
                                         " A.A.A.A    IPv4 address", 15, 3, 1, NULL, NULL },                
-    { DOT1Q_IP_PROTO, "ipproto",  "IP Prot", 1, 0, 255, FIELD_HEX, "Set 802.1Q IP protocols", 
+    { DOT1Q_IP_PROTO, "ipproto",  "IP Prot", 1, FIELD_HEX, "Set 802.1Q IP protocols", 
                                         " <0-FF>     IP protocol", 2, 3, 1, NULL, dot1q_ip_proto },
-    { DOT1Q_PAYLOAD, "payload",   "Payload", MAX_ICMP_PAYLOAD, 0, 0, FIELD_STR, "Set 802.1Q ICMP payload", 
+    { DOT1Q_PAYLOAD, "payload",   "Payload", MAX_ICMP_PAYLOAD, FIELD_STR, "Set 802.1Q ICMP payload", 
                                         " WORD         ASCII payload", MAX_ICMP_PAYLOAD, 4, 0, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 
@@ -158,9 +158,9 @@ void dot1q_th_poison_exit(struct attacks *);
 #define DOT1Q_ARP_IP_SRC 2
 
 static struct attack_param dot1q_arp_params[] = {
-    { NULL, "IP to poison",  4, 0,    0, FIELD_IP,  15, NULL },
-    { NULL, "IP VLAN",       2, 0, 4095, FIELD_DEC,  4, NULL },
-    { NULL, "ARP IP Source", 4, 0,    0, FIELD_IP,  15, NULL }
+    { NULL, "IP to poison",  4, FIELD_IP,  15, NULL },
+    { NULL, "IP VLAN",       2, FIELD_DEC,  4, NULL },
+    { NULL, "ARP IP Source", 4, FIELD_IP,  15, NULL }
 };
 
 

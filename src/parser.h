@@ -1,11 +1,11 @@
 /* parser.h
  * Definitions for command line parser and parser utilities
  *
- * $Id: parser.h 14 2006-04-10 20:37:51Z tomac $ 
+ * $Id: parser.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,6 +57,8 @@ int8_t parser_vrfy_bridge_id( char *, u_int8_t * );
 int8_t parser_command2index(register const struct attack *, register int8_t);
 
 int8_t parser_get_formated_inet_address(u_int32_t, char *, u_int16_t);
+int8_t parser_get_formated_inet_address_fill(u_int32_t in, char *inet, u_int16_t inet_len, int8_t fill_up);
+
 int8_t parser_get_inet_aton(char *, struct in_addr *);
 int8_t parser_get_random_string(u_int8_t *, u_int8_t);
 int8_t parser_get_random_int(u_int8_t);
@@ -66,7 +68,7 @@ void   parser_basedisplay(u_int8_t, u_int8_t, char *, size_t );
 int8_t parser_vrfy_ip2filter(char *, struct term_tty *);
 int8_t parser_add_ip2filter(u_int32_t, u_int32_t, struct term_tty *, char *);
 void   parser_free_ip2filter(struct filter *);
-int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, int32_t, int32_t);
+int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, u_int16_t);
 void   parser_cl_proto_help(u_int8_t, struct term_node *);
 int8_t parser_cl_proto( struct term_node *, int8_t, char **, u_int8_t);
 int8_t parser_binary2printable(u_int8_t, u_int8_t, void *, char *);

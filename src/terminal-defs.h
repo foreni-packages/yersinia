@@ -1,11 +1,11 @@
 /* terminal-defs.h
  * Definitions for lot of things. It must be changed!! :(
  *
- * $Id: terminal-defs.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: terminal-defs.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,8 @@
 #define SIZE_ARRAY(x)   ( (sizeof(x))/(sizeof(x[0])) )
 
 #define LICENSE "Yersinia\
-   \nBy David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>\
-   \nCopyright 2005,2006 Alfredo Andres and David Barroso \
+   \nBy David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>\
+   \nCopyright 2005, 2006, 2007 Alfredo Andres and David Barroso \
    \n\nThis program is free software; you can redistribute it and/or \
    \nmodify it under the terms of the GNU General Public License \
    \nas published by the Free Software Foundation; either version 2 \
@@ -146,7 +146,7 @@
 #define TTY_TIMEOUT    500
 #define LOGIN_TIMEOUT  20
 
-#define WELCOME "\r\nWelcome to "PACKAGE" version "VERSION".\r\nCopyright 2004-2005 Slay & Tomac.\r\n\r\n" 
+#define WELCOME "\r\nWelcome to "PACKAGE" version "VERSION".\r\nCopyright 2004-2007 Slay & Tomac.\r\n\r\n" 
 
 #define VTY_TIMEOUT_BANNER "\r\nVty connection is timed out!!\r\n\r\n"
 
@@ -226,8 +226,6 @@ struct attack_param {
        void     *value;  /* Value */
        char *desc;   /* Description */
        u_int16_t size;   /* Size */
-       int32_t   min;    /* Minimal value */
-       int32_t   max;    /* Maximal value */
        u_int8_t  type;   /* Type */
        u_int16_t size_print; /* Printable size */
        char  *print; /* Printable */
@@ -406,4 +404,3 @@ struct tlv_options {
 };
 
 #endif
-/* vim:set tabstop=4:set expandtab:set shiftwidth=4:set textwidth=78: */

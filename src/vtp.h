@@ -1,11 +1,11 @@
 /* vtp.h
  * Definitions for Cisco's VLAN Trunking Protocol
  *
- * $Id: vtp.h 11 2006-04-04 17:10:14Z slay $ 
+ * $Id: vtp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -184,35 +184,35 @@ struct vtp_data {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param vtp_comm_params[] = {
-    { VTP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { VTP_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { VTP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { VTP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { VTP_VERSION, "version",   "Version", 1, 0, 255, FIELD_HEX, "Set vtp version", 
+    { VTP_VERSION, "version",   "Version", 1, FIELD_HEX, "Set vtp version", 
                                         " <00-FF>    virtual trunking version", 2, 2, 0, NULL, NULL },
-    { VTP_CODE, "code",      "Code", 1, 0, 255, FIELD_HEX, "Set vtp code", 
+    { VTP_CODE, "code",      "Code", 1, FIELD_HEX, "Set vtp code", 
                                         " <00-FF>    virtual trunking code", 2, 2, 1, NULL, vtp_code },
-    { VTP_DOMAIN, "domain",    "Domain", VTP_DOMAIN_SIZE, 0, 0, FIELD_STR, "Set vtp domain name to use", 
+    { VTP_DOMAIN, "domain",    "Domain", VTP_DOMAIN_SIZE, FIELD_STR, "Set vtp domain name to use", 
                                         " WORD    Domain name", VTP_DOMAIN_SIZE, 2, 1, NULL, NULL },
-    { VTP_MD5, "md5",       "MD5", 16, 0, 0, FIELD_BYTES, "Set vtp md5 hash", 
+    { VTP_MD5, "md5",       "MD5", 16, FIELD_BYTES, "Set vtp md5 hash", 
                                         " HHHHH...    MD5 hash", 32, 3, 1, NULL, NULL },
-    { VTP_UPDATER, "updater",   "Updater", 4, 0, 0, FIELD_IP, "Set updater IP address", 
+    { VTP_UPDATER, "updater",   "Updater", 4, FIELD_IP, "Set updater IP address", 
                                         " A.A.A.A    IPv4 address", 15, 3, 0, NULL, NULL },                
-    { VTP_REVISION, "revision",  "Revision", 4, 0, 1999999999, FIELD_DEC, "Set vtp revision number", 
+    { VTP_REVISION, "revision",  "Revision", 4, FIELD_DEC, "Set vtp revision number", 
                                         " <0-1999999999>    Revision number", 10, 4, 0, NULL, NULL },
-    { VTP_TIMESTAMP, "timestamp", "Timestamp", VTP_TIMESTAMP_SIZE, 0, 0, FIELD_STR, "Set vtp timestamp", 
+    { VTP_TIMESTAMP, "timestamp", "Timestamp", VTP_TIMESTAMP_SIZE, FIELD_STR, "Set vtp timestamp", 
                                         " WORD    Timestamp text", VTP_TIMESTAMP_SIZE, 4, 0, NULL, NULL },
-    { VTP_STARTVAL, "startval",  "Start value", 2, 0, 65535, FIELD_DEC, "Set vtp start value", 
+    { VTP_STARTVAL, "startval",  "Start value", 2, FIELD_DEC, "Set vtp start value", 
                                         " <0-65535>    Start value", 5, 4, 0, NULL, NULL },
-    { VTP_FOLLOWERS, "followers", "Followers", 1, 0, 255, FIELD_DEC, "Set vtp followers", 
+    { VTP_FOLLOWERS, "followers", "Followers", 1,  FIELD_DEC, "Set vtp followers", 
                                         " <0-255>    Followers number", 3, 5, 0, NULL, NULL },
-    { VTP_SEQ, "sequence",  "Sequence", 1, 0, 255, FIELD_DEC, "Set vtp sequence number", 
+    { VTP_SEQ, "sequence",  "Sequence", 1, FIELD_DEC, "Set vtp sequence number", 
                                         " <0-255>    Sequence number", 3, 5, 0, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL },
-    { VTP_VLAN, "vlan",     "VLAN", 0, 0, 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
+    { VTP_VLAN, "vlan",     "VLAN", 0, FIELD_EXTRA, "", "", 0, 0, 0, NULL, NULL}
 };
 
 
@@ -231,12 +231,12 @@ void vtp_th_dos_crash_exit(struct attacks *);
 #define VTP_PARAM_VLAN_NAME  1
 
 static struct attack_param vtp_vlan_add_param[] = {
-    { NULL, "VLAN ID",     2,              0, 1006, FIELD_DEC, 4,              NULL },
-    { NULL, "VLAN Name",   VLAN_NAME_SIZE, 0,    0, FIELD_STR, VLAN_NAME_SIZE, NULL }
+    { NULL, "VLAN ID",   2,              FIELD_DEC, 4,              NULL },
+    { NULL, "VLAN Name", VLAN_NAME_SIZE, FIELD_STR, VLAN_NAME_SIZE, NULL }
 };
 
 static struct attack_param vtp_vlan_del_param[] = {
-    { NULL, "VLAN ID",     2, 0, 1006, FIELD_DEC,  4, NULL }
+    { NULL, "VLAN ID",   2, FIELD_DEC,  4, NULL }
 };
 
 #define VTP_ATTACK_SEND    0

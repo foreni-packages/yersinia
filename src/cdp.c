@@ -2,8 +2,8 @@
  * Implementation and attacks for Cisco Discovery Protocol
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-       "$Id: cdp.c 17 2006-04-17 21:02:28Z tomac $";
+       "$Id: cdp.c 43 2007-04-27 11:07:17Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -990,7 +990,6 @@ cdp_get_printable_store(struct term_node *node)
     total = 0;
     /* TLV */
     /* Take care: options in the store are stored in network byte order */
-    write_log(0, "Tengo %d elems y es %X\n", dlist_length(cdp->extra), cdp->extra);
     for (p=cdp->extra;p;p=dlist_next(cdp->extra, p))
     {
        item = (struct commands_param_extra_item *) dlist_data(p);
@@ -1091,8 +1090,6 @@ cdp_get_printable_store(struct term_node *node)
       
       memcpy((void *)field_values[CDP_TLV], (void *)buffer, total);
    }
-
-   write_log(0, "buffer es %s y len es %d\n", buffer, total);
 
     return (char **)field_values;
 }

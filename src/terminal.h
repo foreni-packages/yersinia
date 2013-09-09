@@ -1,11 +1,11 @@
 /* terminal.h
  * Definitions for network terminal management
  *
- * $Id: terminal.h 15 2006-04-10 20:42:06Z tomac $ 
+ * $Id: terminal.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,25 +84,24 @@ char *vty_motd[]={
   "\r\n\r\nMOTD: The nightly bird catches the worm ;)\r\n",
   "\r\n\r\nMOTD: Do you have an ISL capable Cisco switch? Share it!! ;)\r\n", 
   "\r\n\r\nMOTD: Do you have any Alcatel or Juniper switch? Share it!! ;)\r\n",    
-  "\r\n\r\nMOTD: Do you have a Lexicon MC-4? Share it!! ;)\r\n",    
-  "\r\n\r\nMOTD: Do you have a Lexicon MC-8? Share it!! ;)\r\n",       
-  "\r\n\r\nMOTD: Do you have a Lexicon MC-12? Share it!! ;)\r\n",          
-  "\r\n\r\nMOTD: Do you have a Lexicon CX-7? Share it!! ;)\r\n",          
-  "\r\n\r\nMOTD: Do you have a Lexicon LX-7? Share it!! ;)\r\n",          
-  "\r\n\r\nMOTD: Do you have a TAG McLaren AV32R Dual Processor? Share it!! ;)\r\n",          
-  "\r\n\r\nMOTD: Do you have a TAG McLaren AV192R? Share it!! ;)\r\n",          
+  "\r\n\r\nMOTD: Do you have the new Denon AV amplifier with HDMI 1.3 support? Share it!! ;)\r\n",    
   "\r\n\r\nMOTD: Zaragoza, Palencia, Soria... Nice spanish cities to live in, give them a try!\r\n",
-  "\r\n\r\nMOTD: I would like to see romanian wild boars, could you invite me? :)\r\n\tMail me at slay _at_ wasahero.org\r\n",   
+  "\r\n\r\nMOTD: I would like to see romanian wild boars, could you invite me? :)\r\n\tMail me at slay _at_ yersinia.net\r\n",   
   "\r\n\r\nMOTD: The world is waiting for... M-A-T-E-O!!!\r\n",
   "\r\n\r\nMOTD: Who dares wins\r\n",
   "\r\n\r\nMOTD: It's the voodoo who do what you don't dare to people!\r\n",
   "\r\n\r\nMOTD: Magic people, voodoo people!\r\n",
   "\r\n\r\nMOTD: Not one day goes by that I don't ride, 'til the infinite, the horse of my imagination\r\n",
   "\r\n\r\nMOTD: We need a fancy web, could you please help us?\r\n",
-  "\r\n\r\nMOTD: Waiting for my speakers Audiovector Mi3 Avantgarde... :)\r\n",
-  "\r\n\r\nMOTD: Waiting for my surround speakers Audiovector Mi1 Signature... :)\r\n",
-  "\r\n\r\nMOTD: Waiting for my Infocus IN76 DLP projector... :)\r\n",
-  "\r\n\r\nMOTD: Waiting for my Musical Fidelity A5 power amplifier... :)\r\n",
+  "\r\n\r\nMOTD: Having lotto fun with my ProjectionDesign Action! Model Two... :)\r\n",
+  "\r\n\r\nMOTD: Having lotto fun with my Audiovector Mi3 Avantgarde Arrete LE... :)\r\n",
+  "\r\n\r\nMOTD: Having lotto fun with my Denon AVC-A11XVA... :)\r\n",
+  "\r\n\r\nMOTD: My notebook is totally deprecated... gimme one!... :)\r\n",
+  "\r\n\r\nMOTD: Kudos to daddy... wherever you are... :)\r\n",
+  "\r\n\r\nMOTD: I'm waiting for the PS3 but i'm short of money... :'(\r\n",  
+  "\r\n\r\nMOTD: The Hakin9 magazine owe money to us... 500 Euros\r\n",  
+  "\r\n\r\nMOTD: Daniela blu-eyes... :)\r\n",  
+  "\r\n\r\nMOTD: Kudos to daddy... wherever you are... :)\r\n",  
   "\r\n\r\nMOTD: Snowboard on the winter, MBK on the summer :)\r\n"
 };
 
@@ -194,10 +193,10 @@ extern int8_t interfaces_pcap_file_open(struct term_node *, u_int8_t, u_int8_t *
 extern int8_t interfaces_pcap_file_close(struct term_node *, u_int8_t);
 extern void   attack_free_params(struct attack_param *, u_int8_t);
 extern int8_t attack_launch(struct term_node *, u_int16_t, u_int16_t, struct attack_param *, u_int8_t );
-extern int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, int32_t, int32_t);
+extern int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, int16_t);
 extern int8_t interfaces_compare(void *, void *);
 
 extern struct term_tty *tty_tmp;
 
 #endif
-/* vim:set tabstop=4:set expandtab:set shiftwidth=4:set textwidth=78: */
+

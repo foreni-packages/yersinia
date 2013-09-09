@@ -1,11 +1,11 @@
 /* dot1x.h
  * Definitions for IEEE 802.1X
  *
- * $Id: dot1x.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: dot1x.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,25 +120,25 @@ static struct proto_features dot1x_features[] = {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param dot1x_comm_params[] = {
-    { DOT1X_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { DOT1X_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DOT1X_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { DOT1X_DMAC, "dest",      "Destination MAC", 6,FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { DOT1X_VER, "version",   "Ver", 1, 0, 255, FIELD_HEX, "Set 802.1X version", 
+    { DOT1X_VER, "version",   "Ver", 1, FIELD_HEX, "Set 802.1X version", 
                        " <00-FF>    802.1X version", 2, 2, 0, NULL, NULL },
-    { DOT1X_TYPE, "type",      "Type", 1, 0, 255, FIELD_HEX, "Set 802.1X type", 
+    { DOT1X_TYPE, "type",      "Type", 1, FIELD_HEX, "Set 802.1X type", 
                        " <00-FF>    type", 2, 2, 1, NULL, dot1x_type },
-    { DOT1X_EAP_CODE, "eapcode", "EAPCode", 1, 0, 255, FIELD_HEX, "Set 802.1X EAP code", 
+    { DOT1X_EAP_CODE, "eapcode", "EAPCode", 1, FIELD_HEX, "Set 802.1X EAP code", 
                       " <00-FF>         EAP code", 2, 2, 1, NULL, dot1x_eap_code },
-    { DOT1X_EAP_ID,   "eapid",   "EAPId", 1, 0, 255, FIELD_HEX, "Set 802.1X EAP id", 
+    { DOT1X_EAP_ID,   "eapid",   "EAPId", 1, FIELD_HEX, "Set 802.1X EAP id", 
                                         " <00-FF>         EAP id",   2, 2, 0, NULL, NULL },
-    { DOT1X_EAP_TYPE, "eaptype", "EAPType", 1, 0, 255, FIELD_HEX, "Set 802.1X EAP type", 
+    { DOT1X_EAP_TYPE, "eaptype", "EAPType", 1, FIELD_HEX, "Set 802.1X EAP type", 
                                         " <00-FF>         EAP type", 2, 2, 1, NULL, dot1x_eap_type },
-    { DOT1X_EAP_INFO, "eapinfo", "EAPInfo", MAX_EAP_INFO, 0, 0, FIELD_STR, "Set 802.1X EAP identity info", 
+    { DOT1X_EAP_INFO, "eapinfo", "EAPInfo", MAX_EAP_INFO, FIELD_STR, "Set 802.1X EAP identity info", 
                                         " WORD         ASCII info", MAX_EAP_INFO, 3, 1, NULL, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 
@@ -160,8 +160,8 @@ struct dot1x_mitm_ifaces {
 #define DOT1X_MITM_IFACE_AUTH 1
 
 static struct attack_param dot1x_mitm_params[] = {
-    { NULL, "Supplicant interface",    1, 0, 0, FIELD_IFACE, IFNAMSIZ, NULL },
-    { NULL, "Authenticator interface", 1, 0, 0, FIELD_IFACE, IFNAMSIZ, NULL },
+    { NULL, "Supplicant interface",    1, FIELD_IFACE, IFNAMSIZ, NULL },
+    { NULL, "Authenticator interface", 1, FIELD_IFACE, IFNAMSIZ, NULL },
 };
 
 

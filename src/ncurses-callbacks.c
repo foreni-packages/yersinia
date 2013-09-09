@@ -2,8 +2,8 @@
  * Implementation for ncurses callbacks
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] =
-"$Id: ncurses-callbacks.c 16 2006-04-17 15:28:49Z tomac $";
+"$Id: ncurses-callbacks.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -137,8 +137,7 @@ ncurses_c_refresh_mwindow(u_int8_t mode, WINDOW *mwindow, u_int8_t pointer,
       werase(mwindow);
 #endif
       term_console->need_resize--;
-      write_log(0, "Resize mwindow con %d row y %d col y resize es %d\n", row, 
-            col, term_console->need_resize);
+//      write_log(0, "Resize mwindow con %d row y %d col y resize es %d\n", row, col, term_console->need_resize);
    }
 #endif
 
@@ -268,7 +267,7 @@ ncurses_c_refresh_mwindow(u_int8_t mode, WINDOW *mwindow, u_int8_t pointer,
                   ptrtlv = values[tlv];
                   while ((ptrtlv) && (strncmp((char *)ptrtlv, extra_params[j].ldesc, strlen(extra_params[j].ldesc)) != 0))
                   {
-                     write_log(0, "joe ptr es a%sa\n", ptrtlv);
+                     //write_log(0, "joe ptr es a%sa\n", ptrtlv);
                      ptrtlv += strlen((char *)ptrtlv) + 1;
                   }
 
@@ -276,7 +275,7 @@ ncurses_c_refresh_mwindow(u_int8_t mode, WINDOW *mwindow, u_int8_t pointer,
                   {
 
                      ptrtlv += strlen((char *)ptrtlv) + 1;
-                     write_log(0, "ptrtlv values es %s\n", ptrtlv);
+                     //write_log(0, "ptrtlv values es %s\n", ptrtlv);
                      if (extra_params[j].meaning)
                      {
                         //snprintf(meaningbuf, NCURSES_MWINDOW_MAX_FIELD_LENGTH, "%s %s", ptrtlv, parser_get_meaning(ptrtlv, extra_params[j].meaning));
@@ -783,7 +782,7 @@ ncurses_c_refresh_bwindow(u_int8_t mode, WINDOW *bwindow, struct term_node *node
       werase(bwindow); 
 #endif
       term_console->need_resize--;
-      write_log(0, "Resize bwindow con %d row y %d col y resize es %d\n", row, col, term_console->need_resize);
+      //write_log(0, "Resize bwindow con %d row y %d col y resize es %d\n", row, col, term_console->need_resize);
    }
 #endif
 
@@ -957,7 +956,7 @@ ncurses_c_edit_bwindow(u_int8_t mode, WINDOW *mwindow, WINDOW *bwindow, struct t
                {
                   snprintf(buffer, 1024, "%d", result);
                   parser_filter_param(params[state].type, node->protocol[mode].commands_param[state],
-                     buffer, params[state].size_print, params[state].min, params[state].max);
+                     buffer, params[state].size_print, params[state].size);
                }
                curs_set(1);
                ncurses_c_refresh_bwindow(mode, bwindow, node);    
@@ -987,7 +986,7 @@ ncurses_c_edit_bwindow(u_int8_t mode, WINDOW *mwindow, WINDOW *bwindow, struct t
             memset((void *)&buffer, 0, 1024);
             mvwinnstr(bwindow, y, start, buffer, params[state].size_print);
             if (parser_filter_param(params[state].type, node->protocol[mode].commands_param[state],
-                     buffer, params[state].size_print, params[state].min, params[state].max) < 0) {
+                     buffer, params[state].size_print, params[state].size) < 0) {
                mvwaddch(bwindow, y, x, old_value);
                wmove(bwindow, y ,x);
             } else {

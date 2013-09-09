@@ -1,11 +1,11 @@
 /* protocols.h
  * Definitions for protocol stuff
  *
- * $Id: protocols.h 17 2006-04-17 21:02:28Z tomac $ 
+ * $Id: protocols.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,10 +44,12 @@ typedef uint8_t  u_int8_t;
 #define PROTO_DTP    5
 #define PROTO_HSRP   6
 #define PROTO_ISL    7
-#define PROTO_STP    8
-#define PROTO_VTP    9
+#define PROTO_MPLS   8
+#define PROTO_STP    9
+#define PROTO_VTP   10
 
-#define MAX_PROTOCOLS 10 
+
+#define MAX_PROTOCOLS 11 
 
 #define PROTO_VISIBLE 1
 #define PROTO_NOVISIBLE 0
@@ -116,8 +118,6 @@ struct commands_param {
        char     *desc;   /* Description */
        char     *ldesc;  /* Long description */
        u_int16_t size;   /* Size */
-       int32_t   min;    /* Minimal value */
-       int32_t   max;    /* Maximal value */
        u_int8_t  type;   /* Type */
        char     *help;   /* Help text */
        char     *param;  /* Param text */
@@ -134,8 +134,6 @@ struct commands_param_extra {
        char     *desc;   /* Description */
        char     *ldesc;  /* Long description */
        u_int16_t size;   /* Size */
-       int32_t   min;    /* Minimal value */
-       int32_t   max;    /* Maximal value */
        u_int8_t  type;   /* Type */
        char     *help;   /* Help text */
        char     *param;  /* Param text */

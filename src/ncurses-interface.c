@@ -2,8 +2,8 @@
  * Implementation for ncurses interfaces
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #ifndef lint
 static const char rcsid[] =
-"$Id: ncurses-interface.c 18 2006-04-18 09:45:22Z tomac $";
+"$Id: ncurses-interface.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -250,7 +250,7 @@ ncurses_i_splash_screen(WINDOW *splash_screen, PANEL *splash_panel)
    mvwprintw(splash_screen, 2, 17, "Chaos Internetwork Operating System Software");
    mvwprintw(splash_screen, 3, 17, "%s (tm) Software (%s), Version %s, RELEASE SOFTWARE", 
          PACKAGE, INFO_PLATFORM, VERSION);
-   mvwprintw(splash_screen, 4, 21, "Copyright (c) 2004-2006 by tomac & Slay, Inc.");
+   mvwprintw(splash_screen, 4, 21, "Copyright (c) 2004-2007 by tomac & Slay, Inc.");
    mvwprintw(splash_screen, 5, 22, "Compiled %s by someone", INFO_DATE);
    if ( uptime < 60 )
       mvwprintw(splash_screen, 6, 23, "%s uptime is %02lu seconds", PACKAGE, uptime);
@@ -587,18 +587,24 @@ ncurses_i_ifaces_screen(struct term_node *node, WINDOW *ifaces_window,
                j = key_pressed - 97;
                for (p = interfaces->list, i = 0; p && i < j; p = dlist_next(interfaces->list, p), i++);
                iface_data = (struct interface_data *) dlist_data(p);
-               if ((p = dlist_search(node->used_ints->list, node->used_ints->cmp, (void *)iface_data->ifname)) != NULL) { 
-                  iface_data = (struct interface_data *) dlist_data(p);
-                  interfaces_disable(iface_data->ifname);
-                  node->used_ints->list = dlist_remove(node->used_ints->list, iface_data);
-                  change = 1;
-               }
-               else {
-                  interfaces_enable(iface_data->ifname);
-                  iface_new = (struct interface_data *) calloc(1, sizeof(struct interface_data));
-                  memcpy((void *)iface_new, (void *)iface_data, sizeof(struct interface_data));
-                  node->used_ints->list = dlist_append(node->used_ints->list, (void *)iface_new);
-                  change = 1;
+               if (iface_data)
+               {
+                   if ((p = dlist_search(node->used_ints->list, 
+                        node->used_ints->cmp, (void *)iface_data->ifname)) != NULL) 
+                   { 
+                      iface_data = (struct interface_data *) dlist_data(p);
+                      interfaces_disable(iface_data->ifname);
+                      node->used_ints->list = dlist_remove(node->used_ints->list, iface_data);
+                      change = 1;
+                   }
+                   else 
+                   {
+                      interfaces_enable(iface_data->ifname);
+                      iface_new = (struct interface_data *) calloc(1, sizeof(struct interface_data));
+                      memcpy((void *)iface_new, (void *)iface_data, sizeof(struct interface_data));
+                      node->used_ints->list = dlist_append(node->used_ints->list, (void *)iface_new);
+                      change = 1;
+                   }
                }
                break;
          }
@@ -684,7 +690,7 @@ ncurses_i_show_info(u_int8_t mode, WINDOW *main_window, u_int8_t pointer, struct
       while ((ptrtlv) && (strlen((char *)ptrtlv) > 0))
       {
          mvwprintw(info_window, k, 2, "%15s", ptrtlv);
-         write_log(0, "msg es %s\n", ptrtlv);
+         //write_log(0, "msg es %s\n", ptrtlv);
          ptrtlv += strlen((char *)ptrtlv) + 1;
 
          if (ptrtlv)
@@ -1608,8 +1614,6 @@ ncurses_i_add_selected_tlv_type(WINDOW *win, struct term_node *node, u_int8_t mo
       attack_param->desc = calloc(1, strlen(protocols[mode].extra_parameters[pointer].ldesc) + 1);
       strncpy(attack_param->desc, protocols[mode].extra_parameters[pointer].ldesc, strlen(protocols[mode].extra_parameters[pointer].ldesc));
       attack_param->size = protocols[mode].extra_parameters[pointer].size;
-      attack_param->min = protocols[mode].extra_parameters[pointer].min;
-      attack_param->max = protocols[mode].extra_parameters[pointer].max;
       attack_param->type = protocols[mode].extra_parameters[pointer].type;
       attack_param->size_print = protocols[mode].extra_parameters[pointer].size_print;
 

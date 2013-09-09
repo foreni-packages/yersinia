@@ -1,11 +1,11 @@
 /* hsrp.h
  * Definitions for Cisco Hot Standby Router Protocol
  *
- * $Id: hsrp.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: hsrp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,41 +133,41 @@ static struct proto_features hsrp_features[] = {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param hsrp_comm_params[] = {
-   { HSRP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+   { HSRP_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
       " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-   { HSRP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+   { HSRP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
       " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-   { HSRP_SIP, "ipsource",  "SIP", 4, 0, 0, FIELD_IP, "Set source IP address", 
+   { HSRP_SIP, "ipsource",  "SIP", 4, FIELD_IP, "Set source IP address", 
       " A.A.A.A    IPv4 address", 15, 2, 1, NULL, NULL },                
-   { HSRP_DIP, "ipdest",    "DIP", 4, 0, 0, FIELD_IP, "Set destination IP address", 
+   { HSRP_DIP, "ipdest",    "DIP", 4, FIELD_IP, "Set destination IP address", 
       " A.A.A.A    IPv4 address", 15, 2, 1, NULL, NULL },                
-   { HSRP_SPORT, "sport",     "SPort", 2, 0, 65535, FIELD_DEC, "Set UDP source port", 
+   { HSRP_SPORT, "sport",     "SPort", 2, FIELD_DEC, "Set UDP source port", 
       " <0-65535>    UDP source port", 5, 2, 0, NULL, NULL },
-   { HSRP_DPORT, "dport",     "DPort", 2, 0, 65535, FIELD_DEC, "Set UDP destination port", 
+   { HSRP_DPORT, "dport",     "DPort", 2, FIELD_DEC, "Set UDP destination port", 
       " <0-65535>    UDP destination port", 5, 2, 0, NULL, NULL },
-   { HSRP_VER, "version",   "Version", 1, 0, 255, FIELD_HEX, "Set hsrp version", 
+   { HSRP_VER, "version",   "Version", 1, FIELD_HEX, "Set hsrp version", 
       " <00-FF>    hot standby router version", 2, 3, 0, NULL, NULL },
-   { HSRP_OPCODE, "opcode",    "Opcode", 1, 0, 255, FIELD_HEX, "Set hsrp operation code", 
+   { HSRP_OPCODE, "opcode",    "Opcode", 1, FIELD_HEX, "Set hsrp operation code", 
       " <00-FF>    hot standby router operation code", 2, 3, 0, NULL, hsrp_opcode },
-   { HSRP_STATE, "state",     "State", 1, 0, 255, FIELD_HEX, "Set hsrp state", 
+   { HSRP_STATE, "state",     "State", 1,  FIELD_HEX, "Set hsrp state", 
       " <00-FF>    hot standby router state", 2, 3, 0, NULL, hsrp_state },
-   { HSRP_HELLO_TIME, "hello",     "Hello", 1, 0, 255, FIELD_HEX, "Set hsrp hello time", 
+   { HSRP_HELLO_TIME, "hello",     "Hello", 1, FIELD_HEX, "Set hsrp hello time", 
       " <00-FF>    HSRP group", 2, 3, 0, NULL, NULL },
-   { HSRP_HOLD_TIME, "hold",      "Hold", 1, 0, 255, FIELD_HEX, "Set hsrp hold time", 
+   { HSRP_HOLD_TIME, "hold",      "Hold", 1, FIELD_HEX, "Set hsrp hold time", 
       " <00-FF>    HSRP group", 2, 3, 0, NULL, NULL },
-   { HSRP_PRIORITY, "priority",  "Priority", 1, 0, 255, FIELD_HEX, "Set hsrp priority version", 
+   { HSRP_PRIORITY, "priority",  "Priority", 1, FIELD_HEX, "Set hsrp priority version", 
       " <00-FF>    hot standby router priority", 2, 3, 0, NULL, NULL },
-   { HSRP_GROUP, "group",     "Group", 1, 0, 255, FIELD_DEC, "Set hsrp group", 
+   { HSRP_GROUP, "group",     "Group", 1, FIELD_DEC, "Set hsrp group", 
       " <0-255>    HSRP group", 3, 4, 0, NULL, NULL },
-   { HSRP_RESERVED, "reserved",  "Reserved", 1, 0, 255, FIELD_HEX, "Set hsrp reserved", 
+   { HSRP_RESERVED, "reserved",  "Reserved", 1, FIELD_HEX, "Set hsrp reserved", 
       " <00-FF>    hot standby router reserved", 2, 4, 0, NULL, NULL },
-   { HSRP_AUTHDATA, "password",  "Auth", HSRP_AUTHDATA_LENGTH, 0, 0, FIELD_STR, "Set hsrp auth password", 
+   { HSRP_AUTHDATA, "password",  "Auth", HSRP_AUTHDATA_LENGTH, FIELD_STR, "Set hsrp auth password", 
       " WORD         Auth password", HSRP_AUTHDATA_LENGTH, 4, 1, NULL, NULL },
-   { HSRP_VIRTUALIP, "ipvirtual", "VIP", 4, 0, 0, FIELD_IP, "Set virtual IP address", 
+   { HSRP_VIRTUALIP, "ipvirtual", "VIP", 4, FIELD_IP, "Set virtual IP address", 
       " A.A.A.A    IPv4 address", 15, 4, 1, NULL, NULL },                
-   { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+   { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
       " <cr>", 0, 0, 0, NULL, NULL }, 
-   { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+   { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
       " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 
@@ -203,7 +203,7 @@ struct hsrp_printable { /* HSRP and Ethernet fields*/
 
 #define HSRP_SOURCE_IP   0
 static struct attack_param hsrp_active_params[] = {
-  { NULL, "Source IP",    4, 0,    0, FIELD_IP,       15, NULL },
+  { NULL, "Source IP",  4, FIELD_IP, 15, NULL },
 };
 
 void hsrp_th_send_raw(void *);
