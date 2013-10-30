@@ -1,11 +1,11 @@
 /* xstp.h
  * Definitions for Spanning Tree Protocol
  *
- * $Id: xstp.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: xstp.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,37 +137,37 @@ int8_t xstp_com_other(void *, void *, char *);
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param xstp_comm_params[] = {
-    { XSTP_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { XSTP_SMAC, "source",    "Source MAC", 6,  FIELD_MAC, "Set source MAC address", 
                        " H:H:H:H:H:H    48 bit mac address", 17,  1, 0, NULL, NULL },
-    { XSTP_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { XSTP_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                        " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { XSTP_ID, "id",         "Id", 2, 0, 65535, FIELD_HEX, "Set id", 
+    { XSTP_ID, "id",         "Id", 2, FIELD_HEX, "Set id", 
                        " <00-FFFF>    id", 4, 2, 0, NULL, NULL },
-    { XSTP_VER, "version",   "Ver", 1, 0, 255, FIELD_HEX, "Set spanning tree version", 
+    { XSTP_VER, "version",   "Ver", 1, FIELD_HEX, "Set spanning tree version", 
                        " <00-FF>    Spannig tree version", 2, 2, 0, xstp_com_version, xstp_version },
-    { XSTP_TYPE, "type",      "Type", 1, 0, 255, FIELD_HEX, "Set bpdu type", 
+    { XSTP_TYPE, "type",      "Type", 1, FIELD_HEX, "Set bpdu type", 
                        " <00-FF>    bpdu type", 2, 2, 0, xstp_com_type, xstp_type },
-    { XSTP_FLAGS, "flags",     "Flags", 1, 0, 255, FIELD_HEX, "Set bpdu flags", 
+    { XSTP_FLAGS, "flags",     "Flags", 1,FIELD_HEX, "Set bpdu flags", 
                        " <00-FF>    bpdu flags", 2, 2, 0, NULL, xstp_flags },
-    { XSTP_ROOTID, "rootid",    "RootId", 8, 0, 0, FIELD_BRIDGEID, "Set root id", 
+    { XSTP_ROOTID, "rootid",    "RootId", 8, FIELD_BRIDGEID, "Set root id", 
                        " HH.HHHHHH    Root id", 17, 2, 1, NULL, NULL },
-    { XSTP_PATHCOST, "cost",      "Pathcost", 4, 0, 0xFFFFFFFF, FIELD_HEX, "Set the spanning tree root path cost", 
+    { XSTP_PATHCOST, "cost",      "Pathcost", 4, FIELD_HEX, "Set the spanning tree root path cost", 
                        " <00-FFFFFFFF>    root path cost", 8,  2, 0, NULL, NULL },
-    { XSTP_BRIDGEID, "bridgeid",  "BridgeId", 8, 0, 0, FIELD_BRIDGEID, "Set bridge id", 
+    { XSTP_BRIDGEID, "bridgeid",  "BridgeId", 8, FIELD_BRIDGEID, "Set bridge id", 
                        " HH.HHHHHH    Bridge id", 17,  3, 1, NULL, NULL },
-    { XSTP_PORTID, "portid",    "Port", 2, 0, 65535, FIELD_HEX, "Set port id", 
+    { XSTP_PORTID, "portid",    "Port", 2, FIELD_HEX, "Set port id", 
                        " <00-FFFF>    port id", 4, 3, 1, NULL, NULL },
-    { XSTP_AGE, "message",   "Age", 2, 0, 65535, FIELD_HEX, "Set message age", 
+    { XSTP_AGE, "message",   "Age", 2, FIELD_HEX, "Set message age", 
                        " <00-FFFF>    Estimated time in seconds since the root transmitted its config message", 4, 3, 0, xstp_com_other, NULL },
-    { XSTP_MAX, "max-age",   "Max", 2, 0, 65535, FIELD_HEX, "Set the max age interval for the spanning tree", 
+    { XSTP_MAX, "max-age",   "Max", 2, FIELD_HEX, "Set the max age interval for the spanning tree", 
                        " <00-FFFF>    maximum number of seconds the information in a BPDU is valid", 4, 3, 0, xstp_com_other, NULL },
-    { XSTP_HELLO, "hello",     "Hello", 2, 0, 65535, FIELD_HEX, "Set the hello interval for the spanning tree", 
+    { XSTP_HELLO, "hello",     "Hello", 2,  FIELD_HEX, "Set the hello interval for the spanning tree", 
                        " <00-FFFF>    number of seconds between generation of config BPDUs", 4,  3, 0, xstp_com_other, NULL },
-    { XSTP_FWD, "forward",   "Fwd", 2, 0, 65535, FIELD_HEX, "Set the forward delay for the spanning tree", 
+    { XSTP_FWD, "forward",   "Fwd", 2, FIELD_HEX, "Set the forward delay for the spanning tree", 
                        " <00-FFFF>    number of seconds for the forward delay timer", 4, 3, 0, xstp_com_other, NULL },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                        " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                        " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 
@@ -221,8 +221,8 @@ void xstp_pcap_callback(struct pcap_pkthdr *, const u_char *, int);*/
 #define XSTP_MITM_IFACE2 1
 
 static struct attack_param xstp_mitm_params[] = {
-    { NULL, "Interface 1", 1, 0, 0, FIELD_IFACE, IFNAMSIZ, NULL },
-    { NULL, "Interface 2", 1, 0, 0, FIELD_IFACE, IFNAMSIZ, NULL }
+    { NULL, "Interface 1", 1, FIELD_IFACE, IFNAMSIZ, NULL },
+    { NULL, "Interface 2", 1, FIELD_IFACE, IFNAMSIZ, NULL }
 };
 
 #define STP_ATTACK_SEND_CONF  0

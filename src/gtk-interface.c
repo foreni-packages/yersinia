@@ -1,9 +1,10 @@
 /* gtk_interface.c
+ *
  * GTK Interface setup
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +23,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-"$Id: gtk-interface.c 2 2006-04-03 21:04:25Z tomac $";
+"$Id: gtk-interface.c 43 2007-04-27 11:07:17Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -895,8 +896,8 @@ gtk_i_create_aboutdialog (void)
    GtkWidget *aboutdialog;
    int j;
    const gchar *authors[] = {
-      "David Barroso Berrueta <tomac@wasahero.org>",
-      "Alfredo Andr\303\251s Omella <slay@wasahero.org>",
+      "David Barroso Berrueta <tomac@yersinia.net>",
+      "Alfredo Andr\303\251s Omella <slay@yersinia.net>",
       NULL
    };
    /* TRANSLATORS: Replace this string with your names, one name per line. */
@@ -906,13 +907,13 @@ gtk_i_create_aboutdialog (void)
    aboutdialog = gtk_about_dialog_new ();
    gtk_about_dialog_set_version (GTK_ABOUT_DIALOG (aboutdialog), VERSION);
    gtk_about_dialog_set_name (GTK_ABOUT_DIALOG (aboutdialog), _("Yersinia"));
-   gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (aboutdialog), _(" Yersinia\n By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>\nCopyright 2005 Alfredo Andres and David Barroso"));
+   gtk_about_dialog_set_copyright (GTK_ABOUT_DIALOG (aboutdialog), _(" Yersinia\n By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>\nCopyright 2005, 2006, 2007 Alfredo Andres and David Barroso"));
    j = term_motd();
    if (j >= 0)
       gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG (aboutdialog), _(vty_motd[j]));
 
    gtk_about_dialog_set_license (GTK_ABOUT_DIALOG (aboutdialog), LICENSE); 
-   gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (aboutdialog), "http://yersinia.sourceforge.net");
+   gtk_about_dialog_set_website (GTK_ABOUT_DIALOG (aboutdialog), "http://www.yersinia.net");
    gtk_about_dialog_set_website_label (GTK_ABOUT_DIALOG (aboutdialog), _("http://daslfkjsdf"));
    gtk_about_dialog_set_authors (GTK_ABOUT_DIALOG (aboutdialog), authors);
    gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (aboutdialog), translators);

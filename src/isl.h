@@ -1,11 +1,11 @@
 /* isl.h
  * Definitions for ISL 
  *
- * $Id: isl.h 6 2006-04-04 10:43:25Z slay $ 
+ * $Id: isl.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,37 +127,37 @@ static const struct tuple_type_desc isl_ip_proto[] = {
 
 /* Struct needed for using protocol fields within the network client */
 struct commands_param isl_comm_params[] = {
-    { ISL_SMAC, "source",    "Source MAC", 6, 0, 0, FIELD_MAC, "Set source MAC address", 
+    { ISL_SMAC, "source",    "Source MAC", 6, FIELD_MAC, "Set source MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { ISL_DMAC, "dest",      "Destination MAC", 6, 0, 0, FIELD_MAC, "Set destination MAC address", 
+    { ISL_DMAC, "dest",      "Destination MAC", 6, FIELD_MAC, "Set destination MAC address", 
                                         " H:H:H:H:H:H    48 bit mac address", 17, 1, 0, NULL, NULL },
-    { ISL_TYPE, "type",       "Type", 1, 0, 255, FIELD_HEX, "Set ISL type", 
+    { ISL_TYPE, "type",       "Type", 1,  FIELD_HEX, "Set ISL type", 
                                         " <0-FF>    Type", 1, 2, 0, NULL, isl_type },
-    { ISL_USER, "user",       "User", 1, 0, 255, FIELD_HEX, "Set ISL user", 
+    { ISL_USER, "user",       "User", 1,  FIELD_HEX, "Set ISL user", 
                                         " <0-FF>    User", 1, 2, 0, NULL, NULL },
-    { ISL_LEN, "len",          "Len", 2, 0, 0xffff, FIELD_HEX, "Set ISL len", 
+    { ISL_LEN, "len",          "Len", 2,  FIELD_HEX, "Set ISL len", 
                                         " <0-FFFF>     Len", 4, 2, 0, NULL, NULL },
-    { ISL_SNAP,   "snap",     "SNAP", 3, 0, 0xffffff, FIELD_HEX, "Set ISL snap", 
+    { ISL_SNAP,   "snap",     "SNAP", 3,  FIELD_HEX, "Set ISL snap", 
                                         " <0-FFFFFF>    SNAP", 6, 2, 0, NULL, NULL },
-    { ISL_HSA, "hsa",          "HSA", 3, 0, 0xffffff, FIELD_HEX, "Set ISL hsa", 
+    { ISL_HSA, "hsa",          "HSA", 3,  FIELD_HEX, "Set ISL hsa", 
                                         " <0-FFFFFF>    HSA", 6, 2, 0, NULL, NULL },
-    { ISL_VLAN, "vlan",       "VLAN", 2, 0, 0xffff, FIELD_HEX, "Set ISL vlan", 
+    { ISL_VLAN, "vlan",       "VLAN", 2,  FIELD_HEX, "Set ISL vlan", 
                                         " <0-FFFF>    VLAN", 4, 2, 1, NULL, NULL },
-    { ISL_BPDU, "bpdu",       "BPDU", 1, 0, 255, FIELD_HEX, "Set ISL bpdu", 
+    { ISL_BPDU, "bpdu",       "BPDU", 1,  FIELD_HEX, "Set ISL bpdu", 
                                         " <0-FF>     BPDU", 1, 2, 0, NULL, NULL },
-    { ISL_INDEX,   "index",  "Index", 2, 0, 0xffff, FIELD_HEX, "Set ISL index", 
+    { ISL_INDEX,   "index",  "Index", 2,  FIELD_HEX, "Set ISL index", 
                                         " <0-FFFF>    Index", 4, 2, 0, NULL, NULL },
-    { ISL_RES,   "res",        "Res", 2, 0, 0xffff, FIELD_HEX, "Set ISL res", 
+    { ISL_RES,   "res",        "Res", 2,  FIELD_HEX, "Set ISL res", 
                                         " <0-FFFF>    Res", 4, 3, 0, NULL, NULL },
-    { ISL_SRC_IP, "ipsource",  "Src IP", 4, 0, 0, FIELD_IP, "Set ISL IP source data address", 
+    { ISL_SRC_IP, "ipsource",  "Src IP", 4, FIELD_IP, "Set ISL IP source data address", 
                                         " A.A.A.A    IPv4 address", 15, 3, 1, NULL, NULL },                
-    { ISL_DST_IP, "ipdest",    "Dst IP", 4, 0, 0, FIELD_IP, "Set ISL IP destination data address", 
+    { ISL_DST_IP, "ipdest",    "Dst IP", 4, FIELD_IP, "Set ISL IP destination data address", 
                                         " A.A.A.A    IPv4 address", 15, 3, 1, NULL, NULL },                
-    { ISL_IP_PROTO, "ipproto",  "Proto", 1, 0, 255, FIELD_HEX, "Set ISL IP protocol", 
+    { ISL_IP_PROTO, "ipproto",  "Proto", 1, FIELD_HEX, "Set ISL IP protocol", 
                                         " <0-FF>     Proto", 2, 3, 1, NULL, isl_ip_proto },
-    { 0, "defaults",  NULL, 0, 0, 0, FIELD_DEFAULT, "Set all values to default", 
+    { 0, "defaults",  NULL, 0, FIELD_DEFAULT, "Set all values to default", 
                                         " <cr>", 0, 0, 0, NULL, NULL }, 
-    { 0, "interface", NULL, IFNAMSIZ, 0, 0, FIELD_IFACE, "Set network interface to use", 
+    { 0, "interface", NULL, IFNAMSIZ, FIELD_IFACE, "Set network interface to use", 
                                         " WORD    Network interface", IFNAMSIZ, 0, 0, NULL, NULL }
 };
 

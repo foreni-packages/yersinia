@@ -1,3 +1,15 @@
+yersinia (0.7.3-1) unstable; urgency=low
+
+  * took package from Raphael because he wants to orphan it
+  * Ackknowledge NMU from Kumar: Thank you! Closes: #527762
+  * new upstream release 0.7.3 which fixes the interface and
+    interaction problem. Closes: #694762
+  * debian/control added homepage: field Closes: #615299
+  * fix some lintian warnings. Thanks for the hints
+    Closes: #548997
+
+ -- Noël Köthe <noel@debian.org>  Wed, 30 Oct 2013 18:53:19 +0100
+
 yersinia (0.7.1-1.1) unstable; urgency=low
 
   * Non-maintainer upload.

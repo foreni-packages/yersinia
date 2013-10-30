@@ -1,13 +1,14 @@
 Source: yersinia
 Section: admin
 Priority: optional
-Maintainer: Raphael Enrici <blacknoz@club-internet.fr>
+Maintainer: Noël Köthe <noel@debian.org>
 Build-Depends: debhelper (>= 5.0.0), autotools-dev, libncurses5-dev (>=5.4-1), libnet1-dev (>=1.1.2-1), libpcap0.8-dev, libgtk2.0-dev
-Standards-Version: 3.7.2
+Standards-Version: 3.9.5
+Homepage: http://www.yersinia.net/
 
 Package: yersinia
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Network vulnerabilities check software
  Yersinia is a framework for performing layer 2 attacks. It is designed
  to take advantage of some weakeness in different network protocols. It
@@ -25,5 +26,3 @@ Description: Network vulnerabilities check software
   - 802.1x.
   - Inter-Switch Link Protocol (ISL).
   - VLAN Trunking Protocol (VTP).
- .
-  Homepage: http://www.yersinia.net/

@@ -1,4 +1,4 @@
-$Id: FAQ 22 2007-01-26 19:22:14Z tomac $
+$Id: FAQ 43 2007-04-27 11:07:17Z slay $
 
    yersinia FAQ
 
@@ -19,7 +19,8 @@ $Id: FAQ 22 2007-01-26 19:22:14Z tomac $
 3. Building yersinia:
 
    3.1 How can I build yersinia?
-   3.2 When will be the 'put_your_preferred_os_here' supported?
+   3.2 How can I compile yersinia on Mac OSX?
+   3.3 When will be the 'put_your_preferred_os_here' supported?
 
 4. Installing yersinia:
 
@@ -87,7 +88,7 @@ $Id: FAQ 22 2007-01-26 19:22:14Z tomac $
 
    Q 2.1: Where can I download yersinia?
 
-   A: Try http://yersinia.sf.net. Downloads section.
+   A: Try http://www.yersinia.net, downloads section.
 
 
 
@@ -98,7 +99,21 @@ $Id: FAQ 22 2007-01-26 19:22:14Z tomac $
    A: Do a './configure', and then 'make'
 
    
-   Q 3.2: When will be the 'put_your_preferred_os_here' supported?
+   Q 3.2: How can I compile yersinia on Mac OSX?
+
+   A: Install XCode, Darwin ports, and the following ports:
+      autoconf
+      automake
+      expat
+      gettext
+      glib2-devel
+      libiconv
+      libnet11
+      libpcap
+      pkgconfig @0.21_0 (active)
+
+
+   Q 3.3: When will be the 'put_your_preferred_os_here' supported?
 
    A: When someone (like you) help us compiling and patching Yersinia
 

@@ -2,8 +2,8 @@
  * Implementation for Dynamic Host Configuration Protocol
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 
 #ifndef lint
 static const char rcsid[] = 
-       "$Id: dhcp.c 17 2006-04-17 21:02:28Z tomac $";
+       "$Id: dhcp.c 46 2007-05-08 09:13:30Z slay $";
 #endif
 
 #ifdef HAVE_CONFIG_H
@@ -1235,12 +1235,12 @@ dhcp_learn_offer(struct attacks *attacks)
         /* let's go to the options */
         temp = dhcp + 240;
 
-        /* find the magic */
+        /* find the magic 
         if (((*(u_char *) temp) == 0x63) && ((*(u_char *) temp + 1) == 0x82) 
             && ((*(u_char *) temp + 2) == 0x53) && ((*(u_char *) temp + 3) == 0x63))
             printf("Tengo magic\n");
 
-/*        switch (*(dhcp))
+        switch (*(dhcp))
         {
             case LIBNET_DHCP_REPLY:
 
@@ -1303,17 +1303,17 @@ dhcp_get_printable_packet(struct pcap_data *data)
    /* Source IP */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (ip_data+12), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_SIP], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_SIP], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(ip_data+12)), field_values[DHCP_SIP], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(ip_data+12)), field_values[DHCP_SIP], 16, 0);
 #endif
 
    /* Destination IP */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (ip_data+16), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_DIP], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_DIP], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(ip_data+16)), field_values[DHCP_DIP], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(ip_data+16)), field_values[DHCP_DIP], 16, 0);
 #endif
 
    /* Source port */
@@ -1366,30 +1366,30 @@ dhcp_get_printable_packet(struct pcap_data *data)
    /* ciaddr */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (dhcp_data+12), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_CIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_CIADDR], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(dhcp_data+12)), field_values[DHCP_CIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(dhcp_data+12)), field_values[DHCP_CIADDR], 16, 0);
 #endif
    /* yiaddr */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (dhcp_data+16), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_YIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_YIADDR], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(dhcp_data+16)), field_values[DHCP_YIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(dhcp_data+16)), field_values[DHCP_YIADDR], 16, 0);
 #endif
    /* siaddr */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (dhcp_data+20), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_SIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_SIADDR], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(dhcp_data+20)), field_values[DHCP_SIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(dhcp_data+20)), field_values[DHCP_SIADDR], 16, 0);
 #endif
    /* giaddr */
 #ifdef LBL_ALIGN
    memcpy((void *)&aux_long, (dhcp_data+24), 4);
-   parser_get_formated_inet_address(ntohl(aux_long), field_values[DHCP_GIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(aux_long), field_values[DHCP_GIADDR], 16, 0);
 #else
-   parser_get_formated_inet_address(ntohl(*(u_int32_t *)(dhcp_data+24)), field_values[DHCP_GIADDR], 16);
+   parser_get_formated_inet_address_fill(ntohl(*(u_int32_t *)(dhcp_data+24)), field_values[DHCP_GIADDR], 16, 0);
 #endif
    /* chaddr */
    snprintf(field_values[DHCP_CHADDR], 18, "%02X:%02X:%02X:%02X:%02X:%02X",
@@ -1427,7 +1427,6 @@ dhcp_get_printable_packet(struct pcap_data *data)
 
       if (len || ((type == LIBNET_DHCP_END) && (len == 0)))
       {
-         write_log(0, "type chugno es %d\n", type);
          for (k=0; k < protocols[PROTO_DHCP].extra_nparams; k++)
          {
             if (protocols[PROTO_DHCP].extra_parameters[k].id == type) {
@@ -1472,7 +1471,6 @@ dhcp_get_printable_packet(struct pcap_data *data)
                         *buf_ptr = '\0';
                         total_len += 1;
                      } else {
-                        write_log(0, "direccion es %s\n", buf_ptr);
                         buf_ptr += 16;
                         total_len += 16;
                      }

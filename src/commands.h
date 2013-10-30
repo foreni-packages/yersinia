@@ -1,11 +1,11 @@
 /* commands.h
  * Definitions for Cisco CLI commands
  *
- * $Id: commands.h 2 2006-04-03 21:04:25Z tomac $ 
+ * $Id: commands.h 46 2007-05-08 09:13:30Z slay $ 
  *
  * Yersinia
- * By David Barroso <tomac@wasahero.org> and Alfredo Andres <slay@wasahero.org>
- * Copyright 2005 Alfredo Andres and David Barroso
+ * By David Barroso <tomac@yersinia.net> and Alfredo Andres <slay@yersinia.net>
+ * Copyright 2005, 2006, 2007 Alfredo Andres and David Barroso
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ extern int8_t init_attribs(struct term_node *);
 extern void   parser_str_tolower( char *);
 extern int8_t parser_vrfy_mac( char *, u_int8_t * );
 extern int8_t parser_vrfy_bridge_id( char *, u_int8_t * );
-extern int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, int32_t, int32_t);
+extern int8_t parser_filter_param(u_int8_t, void *, char *, u_int16_t, u_int16_t);
 extern void   write_log( u_int16_t mode, char *msg, ... );
 
 #endif
