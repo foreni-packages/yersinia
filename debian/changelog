@@ -1,3 +1,9 @@
+yersinia (0.7.3-1kali1) kali; urgency=medium
+
+  * Update package based on Debian's one, reusing the same orig.tar.gz.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Wed, 28 May 2014 10:52:52 +0200
+
 yersinia (0.7.3-1kali0) kali; urgency=low
 
   * Upstream import
